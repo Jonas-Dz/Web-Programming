@@ -1,0 +1,21 @@
+body {
+    background-color: #f4f4f4;
+    font-family: Arial, sans-serif;
+}
+
+h1 {
+    color: blue;
+}
+
+p {
+    color: gray;
+    font-size: 18px;
+}
+
+.sub {
+    text-decoration: underline;
+}
+
+#color-fondo {
+    background-color: aquamarine;
+}
