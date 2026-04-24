@@ -1,5 +1,4 @@
 #Imagen base oficial de Nginx
-
 FROM nginx:alpine
 
 #Elimina configuracion por defecto
