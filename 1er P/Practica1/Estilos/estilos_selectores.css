@@ -1,0 +1,19 @@
+section p{
+    color: blue;
+}
+
+section >p{
+    color: red;
+}
+
+h2 +p{
+    color: green;
+}
+
+h2 ~p{
+    background-color: yellow;
+}
+
+ul li{
+    border: 1px solid black;
+}
