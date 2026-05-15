@@ -1,120 +1,195 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700&display=swap');
-
+/* =========================================
+   VARIABLES GLOBALES
+   Colores, sombras y medidas reutilizables
+========================================= */
 :root{
-    --azul:#0f172a;
-    --celeste:#2563eb;
-    --gris:#64748b;
+    --negro:#111111;
+    --gris-oscuro:#2f2f2f;
+    --gris:#6b7280;
     --blanco:#ffffff;
-    --fondo:#f1f5f9;
-    --tarjeta:#ffffff;
-    --sombra:0 6px 18px rgba(0,0,0,.08);
-    --hover:0 12px 25px rgba(0,0,0,.15);
-    --radio:14px;
+    --fondo:#f4f4f4;
+    --vino:#7b1e3a;
+    --vino-hover:#5c132b;
+    --vino-subtitulos:#802e30;
+    --blanco-hueso:#fffbf4;
+
+    --sombra:0 5px 15px rgba(0,0,0,.08);
+    --hover:0 10px 22px rgba(0,0,0,.14);
+
+    --radio:5px;
     --transicion:all .3s ease;
 }
 
+
+/* =========================================
+   RESETEO GENERAL
+   Elimina márgenes predeterminados del navegador
+========================================= */
 *{
     margin:0;
     padding:0;
-    box-sizing:border-box;
+    box-sizing:border-box; /* Mantiene tamaño correcto incluyendo padding */
 }
 
+
+/* =========================================
+   HTML
+   Hace scroll suave entre secciones
+========================================= */
 html{
     scroll-behavior:smooth;
 }
 
+
+/* =========================================
+   BODY
+   Estilo general de toda la página
+========================================= */
 body{
-    font-family:'Montserrat', sans-serif;
-    background:linear-gradient(to right,#e0ecff,#f8fbff);
-    color:var(--azul);
-    line-height:1.7;
-    padding:20px;
+
+    font-family:'Georgia', sans-serif; /* Fuente principal */
+
+    background:linear-gradient(to right,#e0ecff,#f8fbff); 
+    /* Fondo degradado horizontal */
+
+    color:var(--negro); /* Color del texto */
+    line-height:1.7; /* Espaciado entre líneas */
+    padding:20px; /* Espacio interno del borde */
 }
 
-/* CONTENEDOR */
 
+/* =========================================
+   CONTENEDOR PRINCIPAL
+   Limita ancho del contenido
+========================================= */
 main{
-    max-width:1100px;
-    margin:auto;
+    max-width:1100px; /* Máximo ancho */
+    margin:auto; /* Centra el contenido */
 }
 
-/* HEADER */
 
+/* =========================================
+   HEADER
+   Sección principal de presentación
+========================================= */
 header{
-    background:linear-gradient(120deg,#0f172a,#1d4ed8);
-    color:white;
-    text-align:center;
-    padding:60px 30px;
-    border-radius:var(--radio);
-    margin-bottom:30px;
-    box-shadow:var(--sombra);
+
+    background:linear-gradient(120deg,var(--negro),var(--vino));
+    /* Fondo degradado */
+
+    color:white; /* Texto blanco */
+    text-align:center; /* Centrado */
+    padding:60px 30px; /* Espaciado interno */
+
+    border-radius:var(--radio); /* Bordes redondeados */
+    margin-bottom:30px; /* Separación inferior */
+
+    box-shadow:var(--sombra); /* Sombra */
 }
 
+
+/* Nombre principal */
 header h1{
     font-size:3.2rem;
     font-weight:700;
 }
 
+
+/* Subtítulo */
 header h4{
     font-weight:300;
     font-size:1.2rem;
     margin-top:10px;
 }
 
-/* BLOQUES */
 
+/* =========================================
+   BLOQUES PRINCIPALES
+   Tarjetas visuales para secciones
+========================================= */
 section,
 article,
 footer{
+
     background:var(--tarjeta);
     padding:30px;
     margin-bottom:25px;
+
     border-radius:var(--radio);
     box-shadow:var(--sombra);
+
     transition:var(--transicion);
 }
 
+
+/* Hover sobre bloques */
 section:hover,
 article:hover,
 footer:hover{
+
     transform:translateY(-6px);
+    /* Eleva el bloque */
+
     box-shadow:var(--hover);
+    /* Intensifica sombra */
 }
 
-/* TITULOS */
+section h4{
+    color:var(--blanco);
+}
 
+
+/* =========================================
+   TÍTULOS PRINCIPALES
+========================================= */
 h3{
+
     font-size:1.6rem;
     margin-bottom:20px;
+
     position:relative;
+    /* Permite posicionar pseudo-elemento */
+
     padding-bottom:10px;
 }
 
+
+/* Línea decorativa debajo del título */
 h3::after{
+
     content:"";
-    width:70px;
-    height:4px;
-    background:var(--celeste);
+    width:100px;
+    height:2px;
+
+    background:var(--gris-oscuro);
+
     position:absolute;
     left:0;
     bottom:0;
+
     border-radius:10px;
 }
 
+
+/* Subtítulos */
 h4{
     margin-top:18px;
-    color:var(--celeste);
+    color:var(--vino-subtitulos);
 }
 
-/* PARRAFOS */
 
+/* =========================================
+   PÁRRAFOS
+========================================= */
 p{
     text-align:justify;
     margin-bottom:10px;
 }
 
-/* LISTAS */
 
+/* =========================================
+   LISTAS
+========================================= */
 ul{
     padding-left:20px;
 }
@@ -123,95 +198,174 @@ li{
     margin-bottom:10px;
 }
 
-/* SELECTORES AVANZADOS */
 
+/* =========================================
+   SELECTORES AVANZADOS
+========================================= */
+
+/* Solo afecta datos de contacto */
 section:first-of-type li{
+
     list-style:none;
-    background:#eff6ff;
+    /* Quita viñetas */
+
+    background:var(--blanco);
+    /* Fondo celeste suave */
+
     padding:12px;
+
     border-left:4px solid var(--celeste);
+    /* Línea lateral */
+
     border-radius:8px;
     margin-bottom:10px;
 }
 
+
+/* Hover solo a items de listas dentro article */
 article ul li:hover{
-    color:var(--celeste);
+    color:var(--gris);
     padding-left:6px;
     transition:.2s;
 }
 
+article #enlace-git{
+    text-decoration:none;
+    color:var(--vino-subtitulos);
+    transition:.2s;
+}
+
+article #enlace-git:hover{
+    text-decoration:none;
+    color:var(--vino-hover);
+    padding-left:6px;
+    transition:.2s;
+    cursor:pointer;
+}
+
+/* Párrafos dentro aside */
 aside p{
+
     font-style:italic;
     color:var(--gris);
     font-weight:600;
 }
 
-/* FORMULARIO */
 
+/* =========================================
+   FORMULARIO
+========================================= */
 form{
+
     display:flex;
     flex-direction:column;
+    /* Apila elementos */
+
     gap:15px;
+    /* Espaciado */
+
     margin-top:20px;
 }
 
+
+/* Inputs y textarea */
 input,
 textarea{
+
     padding:12px;
     border:2px solid #cbd5e1;
     border-radius:8px;
+
     font-family:inherit;
     font-size:1rem;
+
     transition:var(--transicion);
 }
 
+
+/* Al hacer clic */
 input:focus,
 textarea:focus{
+
     outline:none;
-    border-color:var(--celeste);
+
+    border-color:var(--vino-hover);
+
     box-shadow:0 0 8px rgba(37,99,235,.2);
 }
 
+
+/* Botón */
 button{
-    background:var(--celeste);
-    color:white;
+
+    background:var(--gris);
+    color:var(--blanco);
+
     border:none;
+
     padding:14px;
+
     border-radius:8px;
+
     cursor:pointer;
+    /* Cambia cursor */
+
     font-size:1rem;
     font-weight:600;
+
     transition:var(--transicion);
 }
 
+
+/* Hover botón */
 button:hover{
-    background:#1d4ed8;
+
+    background:var(--vino);
     transform:scale(1.02);
 }
 
-/* FOOTER */
 
+/* =========================================
+   FOOTER
+========================================= */
 footer{
     text-align:center;
 }
 
+
+/* Enlace footer */
 footer a{
-    display:inline-block;
     text-decoration:none;
-    margin:15px 0;
-    background:var(--azul);
-    color:white;
-    padding:12px 25px;
+    background:var(--gris);
+    color:var(--blanco);
+
+    border:none;
+
+    padding:14px;
+
     border-radius:8px;
+
+    cursor:pointer;
+    /* Cambia cursor */
+
+    font-size:1rem;
+    font-weight:600;
+
     transition:var(--transicion);
 }
 
+
+/* Hover enlace */
 footer a:hover{
-    background:var(--celeste);
+    background:var(--vino);
+    transform:scale(1.02);
 }
 
-/* RESPONSIVE */
 
+/* =========================================
+   RESPONSIVE DESIGN
+   Adaptación para móviles
+========================================= */
 @media(max-width:768px){
 
     body{
