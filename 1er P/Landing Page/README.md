@@ -61,5 +61,7 @@ Para descargar la imagen desde Docker Hub utilizamos
 Una vez descargada la imagen, la ejecutaremos como si nosotros la hubiesemos creado, pero ahora nombrando el usuario y el nombre de la imagen  
 `docker run -d -p 8080:80 jonasdz2002/jonas-nginx`  
 
-
+***
+[Link a la imagen en Docker](https://hub.docker.com/r/jonasdz2002/jonas-nginx)
+***
 

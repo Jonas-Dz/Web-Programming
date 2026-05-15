@@ -1,7 +1,3 @@
-/* =========================================
-   VARIABLES GLOBALES
-   Colores, sombras y medidas reutilizables
-========================================= */
 :root{
     --negro:#111111;
     --gris-oscuro:#2f2f2f;
@@ -11,7 +7,6 @@
     --vino:#7b1e3a;
     --vino-hover:#5c132b;
     --vino-subtitulos:#802e30;
-    --blanco-hueso:#fffbf4;
 
     --sombra:0 5px 15px rgba(0,0,0,.08);
     --hover:0 10px 22px rgba(0,0,0,.14);
@@ -21,10 +16,6 @@
 }
 
 
-/* =========================================
-   RESETEO GENERAL
-   Elimina márgenes predeterminados del navegador
-========================================= */
 *{
     margin:0;
     padding:0;
@@ -32,10 +23,6 @@
 }
 
 
-/* =========================================
-   HTML
-   Hace scroll suave entre secciones
-========================================= */
 html{
     scroll-behavior:smooth;
 }
@@ -58,20 +45,12 @@ body{
 }
 
 
-/* =========================================
-   CONTENEDOR PRINCIPAL
-   Limita ancho del contenido
-========================================= */
 main{
     max-width:1100px; /* Máximo ancho */
     margin:auto; /* Centra el contenido */
 }
 
 
-/* =========================================
-   HEADER
-   Sección principal de presentación
-========================================= */
 header{
 
     background:linear-gradient(120deg,var(--negro),var(--vino));
@@ -103,10 +82,6 @@ header h4{
 }
 
 
-/* =========================================
-   BLOQUES PRINCIPALES
-   Tarjetas visuales para secciones
-========================================= */
 section,
 article,
 footer{
@@ -148,13 +123,12 @@ h3{
     margin-bottom:20px;
 
     position:relative;
-    /* Permite posicionar pseudo-elemento */
 
     padding-bottom:10px;
 }
 
 
-/* Línea decorativa debajo del título */
+/* linea bajo titulo */
 h3::after{
 
     content:"";
@@ -361,6 +335,12 @@ footer a:hover{
     transform:scale(1.02);
 }
 
+footer p{
+    margin-top:15px;
+    color:var(--gris);
+    font-size:0.9rem;
+    text-align:center;
+}
 
 /* =========================================
    RESPONSIVE DESIGN
