@@ -1,187 +1,207 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="es">
+ 
 <head>
     <meta charset="UTF-8">
-    <title>CV Jonatha Diaz</title>
-    <link rel="icon" href="./Imagenes/iconGlobo.svg">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jonathan Diaz — Software Engineer</title>
     <link rel="stylesheet" href="style.css">
 </head>
-
+ 
 <body>
-    <header>
-        <h1>
-            Jonathan Diaz
-        </h1>
-        <section>
-            <h4 id="subtitulo-header">
-                Estudiante de Ingeniería de Software
-            </h4>
-        </section>
-        <hr>
+ 
+    <!-- ===== NAVBAR ===== -->
+    <nav>
+        <span class="nav-logo">JD</span>
+        <ul class="nav-links">
+            <li><a href="#sobre-mi">Sobre mí</a></li>
+            <li><a href="#experiencia">Experiencia</a></li>
+            <li><a href="#proyectos">Proyectos</a></li>
+            <li><a href="#habilidades">Habilidades</a></li>
+            <li><a href="#contacto" class="nav-btn">Contacto</a></li>
+        </ul>
+    </nav>
+ 
+    <!-- ===== HERO ===== -->
+    <header id="hero">
+        <div class="hero-texto">
+            <p class="hero-tag">Estudiante de Ingeniería de Software</p>
+            <h1>Jonathan<br><span>Diaz</span></h1>
+            <p class="hero-desc">
+                Apasionado por el software con más de tres años de experiencia académica
+                en programación, análisis de proyectos e implementación tecnológica.
+            </p>
+            <div class="hero-btns">
+                <a href="#proyectos" class="btn-primario">Ver proyectos</a>
+                <a href="#contacto" class="btn-secundario">Contáctame</a>
+            </div>
+        </div>
+        <div class="hero-badge">
+            <div class="badge-circulo">
+                <span>ESPE</span>
+                <small>4to semestre</small>
+            </div>
+        </div>
     </header>
-
+ 
     <main>
-        <section>
-            <h3>Información de Contacto</h3>
-            <ul>
-                <li>0983342102</li>
-                <li>jonathandz2002@hotmail.com</li>
-                <li>Quito, Ecuador</strong></li>
-            </ul>
-            <hr>
+ 
+        <!-- ===== SOBRE MÍ ===== -->
+        <section id="sobre-mi">
+            <div class="seccion-titulo">
+                <h2>Sobre mí</h2>
+            </div>
+            <div class="sobre-grid">
+                <div class="sobre-texto">
+                    <p>
+                        Soy un desarrollador motivado y entusiasta con conocimientos en diferentes
+                        tecnologías tanto de hardware como software. Me especializo en construir
+                        soluciones digitales que combinan funcionalidad con buenas prácticas de desarrollo.
+                    </p>
+                    <ul class="info-contacto">
+                        <li>Quito, Ecuador</li>
+                        <li>0983342102</li>
+                        <li>jonathandz2002@hotmail.com</li>
+                    </ul>
+                </div>
+                <div class="sobre-academico">
+                    <h3>Formación Académica</h3>
+                    <div class="academia-item">
+                        <span class="academia-fecha">2021 – 2023</span>
+                        <p class="academia-titulo">Tecnología en Desarrollo de Software</p>
+                        <p class="academia-lugar">Instituto Tecnológico Superior Quito</p>
+                    </div>
+                    <div class="academia-item">
+                        <span class="academia-fecha">Actualmente</span>
+                        <p class="academia-titulo">Ingeniería de Software — 4to Semestre</p>
+                        <p class="academia-lugar">Universidad de las Fuerzas Armadas ESPE</p>
+                    </div>
+                </div>
+            </div>
         </section>
-
-        <section>
-            <h3>Sobre mi</h3>
-            <p>
-                Apasionado por el software, motivado y
-                entusiasta con conocimientos en diferentes
-                tecnologías tanto de hardware como
-                software. Poseo alrededor de tres años de
-                experiencia académica en programación,
-                análisis de proyectos e implementación
-                tecnológica.
-            </p>
-            <hr>
+ 
+        <!-- ===== EXPERIENCIA ===== -->
+        <section id="experiencia">
+            <div class="seccion-titulo">
+                <h2>Experiencia</h2>
+            </div>
+            <div class="exp-grid">
+ 
+                <article class="exp-card">
+                    <div class="exp-header">
+                        <h4>Analista Comercial</h4>
+                        <span class="exp-empresa">Servicat</span>
+                    </div>
+                    <ul>
+                        <li>Mantenimiento y desarrollo de dashboards en Power BI.</li>
+                        <li>Manejo de Windows Fabric para creación de aplicaciones con control por grupos de usuarios.</li>
+                        <li>Desarrollo de modelos semánticos para dashboards.</li>
+                        <li>Análisis de presupuestos a nivel de producto, marca y sucursal.</li>
+                        <li>Gestión de la plataforma Uber Business y Uber Central.</li>
+                    </ul>
+                </article>
+ 
+                <article class="exp-card">
+                    <div class="exp-header">
+                        <h4>Mantenimiento de Computadores</h4>
+                        <span class="exp-empresa">Emprendimiento Personal</span>
+                    </div>
+                    <ul>
+                        <li>Limpieza y restauración de componentes electrónicos.</li>
+                        <li>Instalación de software y sistemas operativos.</li>
+                        <li>Venta de componentes electrónicos.</li>
+                        <li>Verificación de funcionamiento post-instalación.</li>
+                    </ul>
+                </article>
+ 
+            </div>
         </section>
-
-        <article>
-            <h3>Experiencia - Proyectos</h3>
-
-            <h4>Mantenimiento y ensamblaje de Computadores</h4>
-            <aside>
-                <p>Emprendimiento Personal</p>
-            </aside>
-            <ul>
-                <li>Limpieza y restauración de
-                    componentes electrónicos.
-                </li>
-                <li>Instalación de Softwares y paquetes a
-                    conveniencia del cliente.
-                </li>
-                <li>
-                    Venta de componentes electrónicos
-                    para computadores.
-                </li>
-                <li>Instalación de sistemas operativos y
-                    comprobación de su funcionamiento
-                </li>
-            </ul>
-
-            <h4>Analista Comercial</h4>
-            <aside>
-                <p>Servicat</p>
-            </aside>
-            <ul>
-                <li>Mantenimiento y desarrollo de dashboards en Power BI.</li>
-                <li>Manejo y control de la plataforma de Windows Fabric para la creación de aplicaciones.
-                    Control de visualización por grupos de usuarios.
-                </li>
-                <li>
-                    Desarrollador de modelos semánticos para la posterior implementación en dashboards.
-                </li>
-                <li>Manejo de herramientas ofimáticas para el análisis de presupuestos a nivel de producto, marca y
-                    sucursal.
-                </li>
-                <li>Encargado de la aplicación Uber Business y el correcto uso de la plataforma Uber Central.
-                </li>
-            </ul>
-            <hr>
-        </article>
-
-        <article>
-            <h3>Aplicacion de Conocimientos</h3>
-
-            <h4>
-                <a href="https://github.com/Jonas-Dz/Web-Programming" target="_blank" id="enlace-git">
-                    ESAV AIRLINE
-                </a>
-            </h4>
-            <p>
-                Desarrollé una aplicación web informativa
-                mediante el uso de Bootstrap y herramientas
-                web, además de estar conectada a una base
-                de datos en SQL Server.
-            </p>
-
-            <h4>
-                <a href="https://github.com/Jonas-Dz/LandingPageESPE-TECH" target="_blank" id="enlace-git">
-                    Aplicación Hospitalaria
-                </a>
-            </h4>
-            <p>
-                Desarrollé un sistema en java que se encarga
-                del proceso de automatización de reservas
-                de ámbito hospitalario. El sistema se
-                conectaba a una base de datos en SQL
-                Server y permitía la manipulación de datos.
-            </p>
-
-            <h4>
-                <a href="https://github.com/Jonas-Dz/BaskeTeams" target="_blank" id="enlace-git">
-                    Proyecto BaskeTeams
-                </a>
-            </h4>
-            <p>
-                Desarrollé un sistema de análisis de datos
-                respecto a equipos de Basket implementando
-                Java e interfaces gráficas usando PowerBI.
-            </p>
-            <hr>
-        </article>
-
-        <article>
-            <h3>Información Académica</h3>
-            <h4>INSTITUTO TECNOLOGICO SUPERIOR QUITO / 2021 - 2023</h4>
-            <aside>
-                <p>Tecnología en Desarrollo de Software</p>
-            </aside>
-
-            <h4>UNIVERSIDAD DE LAS FUERZAS ARMADAS ESPE</h4>
-            <aside>
-                <p>Ingeniería de Software (Cursando 4to semestre)</p>
-            </aside>
-            <hr>
-        </article>
-
-        <article>
-            <h3>Habilidades Técnicas</h3>
-            <ul>
-                <li>HTML5 y CSS3</li>
-                <li>Java</li>
-                <li>SQL Server</li>
-                <li>Power BI</li>
-                <li>Docker</li>
-                <li>Power Apps</li>
-            </ul>
-            <hr>
-        </article>
-
-        <section>
-            <h3>Contáctame</h3>
-            <form>
-                <label>Nombre:</label>
-                <input type="text" placeholder="Ingrese su nombre">
-
-                <label>Correo:</label>
-                <input type="email" placeholder="Ingrese su correo">
-
-                <label>Mensaje:</label>
-                <textarea placeholder="Escriba su mensaje"></textarea>
-
-                <button type="submit">Enviar</button>
-            </form>
+ 
+        <!-- ===== PROYECTOS ===== -->
+        <section id="proyectos">
+            <div class="seccion-titulo">
+                <h2>Proyectos</h2>
+            </div>
+            <div class="proyectos-grid">
+ 
+                <article class="proyecto-card">
+                    <div class="proyecto-numero">01</div>
+                    <h4>ESAV Airline</h4>
+                    <p>Aplicación web informativa con Bootstrap conectada a una base de datos en SQL Server.</p>
+                    <a href="https://github.com/Jonas-Dz/Web-Programming" target="_blank" class="proyecto-link">
+                        Ver en GitHub →
+                    </a>
+                </article>
+ 
+                <article class="proyecto-card">
+                    <div class="proyecto-numero">02</div>
+                    <h4>Aplicación Hospitalaria</h4>
+                    <p>Sistema en Java para automatizar reservas hospitalarias, conectado a SQL Server con manipulación de datos.</p>
+                    <a href="https://github.com/Jonas-Dz/LandingPageESPE-TECH" target="_blank" class="proyecto-link">
+                        Ver en GitHub →
+                    </a>
+                </article>
+ 
+                <article class="proyecto-card">
+                    <div class="proyecto-numero">03</div>
+                    <h4>BaskeTeams</h4>
+                    <p>Sistema de análisis de datos para equipos de basket implementado en Java con visualizaciones en Power BI.</p>
+                    <a href="https://github.com/Jonas-Dz/BaskeTeams" target="_blank" class="proyecto-link">
+                        Ver en GitHub →
+                    </a>
+                </article>
+ 
+            </div>
         </section>
-
-        <footer>
-            <h3>Contacto</h3>
-            <a href="https://wa.me/593983342102">Envíame un mensaje</a>
-            <br><br>
-            <p>&reg; Jonathan Diaz. Todos los derechos reservados</p>
-        </footer>
-
+ 
+        <!-- ===== HABILIDADES ===== -->
+        <section id="habilidades">
+            <div class="seccion-titulo">
+                <h2>Habilidades Técnicas</h2>
+            </div>
+            <div class="habilidades-grid">
+                <div class="habilidad-chip">HTML5 &amp; CSS3</div>
+                <div class="habilidad-chip">Java</div>
+                <div class="habilidad-chip">SQL Server</div>
+                <div class="habilidad-chip">Power BI</div>
+                <div class="habilidad-chip">Docker</div>
+                <div class="habilidad-chip">Power Apps</div>
+            </div>
+        </section>
+ 
+        <!-- ===== CONTACTO ===== -->
+        <section id="contacto" class="contacto-seccion">
+            <div class="seccion-titulo">
+                <h2>Contáctame</h2>
+            </div>
+            <div class="contacto-grid">
+                <div class="contacto-info">
+                    <p>¿Tienes un proyecto o propuesta? Escríbeme y con gusto conversamos.</p>
+                    <a href="https://wa.me/593983342102" class="btn-primario" style="display:inline-block; margin-top:20px;">
+                        WhatsApp
+                    </a>
+                </div>
+                <form class="contacto-form">
+                    <label>Nombre</label>
+                    <input type="text" placeholder="Tu nombre">
+ 
+                    <label>Correo</label>
+                    <input type="email" placeholder="Tu correo">
+ 
+                    <label>Mensaje</label>
+                    <textarea rows="4" placeholder="Tu mensaje"></textarea>
+ 
+                    <button type="submit">Enviar mensaje</button>
+                </form>
+            </div>
+        </section>
+ 
     </main>
+ 
+    <!-- ===== FOOTER ===== -->
+    <footer>
+        <p>© Jonathan Diaz. Todos los derechos reservados.</p>
+    </footer>
+ 
 </body>
-
 </html>
