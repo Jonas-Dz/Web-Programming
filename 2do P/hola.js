@@ -1,4 +1,6 @@
-/*console.log("Hello, World! ya quiero que acabe el semestre");
+//Ejercicio 1
+
+/*console.log("hola");
 let num1 = Number(prompt("ingrese número: "));
 let num2 = Number(prompt("ingrese número: "));
 console.log("La suma es: " + (num1 + num2));
@@ -35,6 +37,36 @@ if (imc < 18.5) {
 }
 */
 
-let a=5
-let b="5"
-console.log(`${a==b}`)
+//Ejercicio 2
+
+/*
+console.log("Clasificacion de edad");
+
+let edad = Number(prompt("Ingrese la edad: "));
+
+if(isNaN(edad) || edad < 0){
+    console.log("Edad no invalida");
+} else if(edad < 12){
+    console.log("Niño");
+} else if(edad >= 12 && edad <= 17){
+    console.log("Adolescente");
+} else if(edad >= 18 && edad <= 64){
+    console.log("Adulto");
+} else if(edad >= 65){
+    console.log("Adulto mayor");
+}
+console.log("Edad: " + edad);
+
+*/
+
+//Ejercicio 3
+
+console.log("Tabla de multiplicar");
+
+let numero = Number(prompt("Ingrese un numero: "));
+let factor = 0;
+
+while(factor <= 12){
+    console.log(factor + " * " + numero + " = " + (factor * numero));
+    factor++;
+}
