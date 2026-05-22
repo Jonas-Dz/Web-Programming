@@ -64,9 +64,10 @@ console.log("Edad: " + edad);
 console.log("Tabla de multiplicar");
 
 let numero = Number(prompt("Ingrese un numero: "));
-let factor = 0;
+let factor = 1;
 
 while(factor <= 12){
     console.log(factor + " * " + numero + " = " + (factor * numero));
     factor++;
 }
+
