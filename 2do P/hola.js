@@ -60,7 +60,7 @@ console.log("Edad: " + edad);
 */
 
 //Ejercicio 3
-
+/* 
 console.log("Tabla de multiplicar");
 
 let numero = Number(prompt("Ingrese un numero: "));
@@ -71,3 +71,66 @@ while(factor <= 12){
     factor++;
 }
 
+*/
+
+//Ejercicio 4 Fibonacci
+
+//Ejercicio 4 Fibonacci
+
+alert("Secuencia de Fibonacci");
+
+let n = Number(prompt("Ingrese la cantidad de términos: "));
+
+let num1 = 0;
+let num2 = 1;
+let contador = 1;
+
+while(contador <= n){
+
+    console.log(num1);
+
+    let siguiente = fibonacci(num1, num2);
+
+    num1 = num2;
+    num2 = siguiente;
+
+    contador++;
+}
+
+function fibonacci(a, b){
+    return a + b;
+}
+
+//Funciones anonimas
+const multiplicar = function(a, b){
+    return a * b;
+}
+
+console.log(multiplicar(5, 3));
+
+//Funcion flecha
+const restar = (a, b) =>{
+    return a - b;
+}
+
+console.log(restar(10, 4));
+
+//Funcion cuadrado mediante flecha
+const cuadrado = numero => {
+    return numero * numero;
+}
+
+console.log(cuadrado(5));
+
+//Documentar
+/**
+ * Calcular el promedio de tres números
+ * @param {number} n1 - El primer número
+ * @param {number} n2 - El segundo número
+ * @param {number} n3 - El tercer número
+ * @returns {number} El promedio de los tres números
+ */
+
+function calcularPromedio(n1, n2, n3){
+    return (n1,n2,n3)/3;
+}
