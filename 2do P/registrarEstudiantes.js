@@ -11,7 +11,6 @@ function registrarEstudiante() {
     let tabla = document.getElementById("tablaEstudiantes");
 
     if (!tabla) {
-
         tabla = document.createElement("table");
         tabla.id = "tablaEstudiantes";
         tabla.border = "1";
@@ -19,9 +18,7 @@ function registrarEstudiante() {
         const encabezado = document.createElement("tr");
 
         encabezado.innerHTML = "<th>Numero</th>" + "<th>Nombre</th>" + "<th>Edad</th>";
-
         tabla.appendChild(encabezado);
-
         contenedor.appendChild(tabla);
     }
 
@@ -36,4 +33,19 @@ function registrarEstudiante() {
 
     document.getElementById("nombre").value = "";
     document.getElementById("edad").value = "";
+
+    sumarEdad();
+}
+
+function sumarEdad() {
+
+    const tabla = document.getElementById("tablaEstudiantes");
+    let total = 0;
+
+    for(let i = 1; i < tabla.rows.length; i++) {
+        let edad = parseInt(tabla.rows[i].cells[2].innerText);
+        total += edad;
+    }
+
+    document.getElementById("totalEdad").innerHTML = "Suma total de edades: " + total;
 }
