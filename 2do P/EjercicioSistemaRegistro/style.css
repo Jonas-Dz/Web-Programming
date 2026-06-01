@@ -1,0 +1,14 @@
+.formulario {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 300px;
+}
+
+#tablaEstadisticas {
+    border: 1px solid black;
+}
+
+#estadisticas p{
+    background-color: blue;
+}

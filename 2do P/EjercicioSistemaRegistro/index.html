@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro de Productos</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- Registro Estudiantes
+    <h1>Registro de Estudiantes</h1>
+    <input type="text" id="nombre" placeholder="Ingrese el nombre">
+    <br><br>
+    <input type="number" id="edad" placeholder="Ingrese la edad">
+    <br><br>
+    <button id="btnRegistrar">
+        Registrar Estudiante
+    </button>
+    <h3 id="contador">
+        Total de estudiantes registrados: 0
+    </h3>
+    <div id="resultado"></div>
+    <h3 id="totalEdad">
+        Suma total de edades: 0
+    </h3>
+    -->
+
+    <!-- Forms -->
+    <h1>Sistema de Registro de Productos</h1>
+    <div class="formulario">
+        <input type="text" id="nombre" placeholder="Nombre del producto">
+
+        <select id="categoria">
+            <option value="">Seleccione una categoría</option>
+            <option>Electrónica</option>
+            <option>Ropa</option>
+            <option>Alimentos</option>
+            <option>Hogar</option>
+        </select>
+
+        <input type="number" id="precio" placeholder="Precio">
+
+        <button id="btnRegistrar">
+            Registrar Producto
+        </button>
+    </div>
+    <!-- Fin Forms-->
+    <!-- Tabla -->
+    <br><br>
+    <table id="tablaEstadisticas">
+        <thead>
+            <tr>
+                <th>N</th>
+                <th>Producto</th>
+                <th>Categoria</th>
+                <th>Precio ($)</th>
+            </tr>
+        </thead>
+
+        <tbody id="tablaProductos"></tbody>
+    </table>
+
+    <!-- Fin Tabla -->
+    <!-- Estadísticas -->
+    <h2>Estadísticas</h2>
+
+    <div class = "estadisticas">
+        <p id="totalProductos">
+            Total de productos: 0
+        </p>
+
+        <p id="valorTotal">
+            Valor total: $0
+        </p>
+
+        <p id="promedio">
+            Precio promedio: $0
+        </p>
+
+        <p id="masCaro">
+            Producto más caro: -
+        </p>
+    </div>
+    <!-- Fin Estadísticas -->
+
+    <script src="sistemaRegistro.js"></script>
+</body>
+
+</html>
