@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro de Autos</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <!-- Forms -->
+    <h1>Sistema de Registro de Autos</h1>
+    <div class="formulario">
+        <input type="text" id="placa" placeholder="Placa">
+        
+        <input type="text" id="marca" placeholder="Marca">
+
+        <input type="text" id="modelo" placeholder="Modelo">
+
+        <input type="number" id="km" placeholder="Kilometraje">
+
+        <button id="btnRegistrar">
+            Registrar Auto
+        </button>
+    </div>
+    <!-- Fin Forms-->
+    <!-- Tabla -->
+    <br><br>
+    <table id="tablaEstadisticas" border="1">
+        <thead>
+            <tr>
+                <th>N</th>
+                <th>Placa</th>
+                <th>Marca</th>
+                <th>Modelo</th>
+                <th>Kilometraje</th>
+            </tr>
+        </thead>
+
+        <tbody id="tablaAutos"></tbody>
+    </table>
+
+    <!-- Fin Tabla -->
+    <!-- Estadisticas -->
+    <h2>Estadisticas</h2>
+
+    <div class = "estadisticas">
+        <p id="totalAutos">
+            Total de autos: 0
+        </p>
+
+        <p id="valorTotal">
+            Total de kilometraje: 0 km
+        </p>
+    </div>
+    <!-- Fin Estadísticas -->
+
+    <script src="autos.js"></script>
+</body>
+
+</html>
