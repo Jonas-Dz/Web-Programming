@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Prueba Practica</title>
+</head>
+<body>
+    <!-- Forms -->
+    <h1>Sistema de Registro de Especies Forestales</h1>
+    <div class="formulario">        
+        <input type="text" id="codigo" placeholder="Codigo" required>
+
+        <input type="text" id="especie" placeholder="Especie" required>
+
+        <select id="zona" required>
+            <option value="">Seleccione una zona</option>
+            <option>Norte</option>
+            <option>Sur</option>
+            <option>Este</option>
+            <option>Oeste</option>
+            <option>Centro</option>
+        </select>
+
+        <input type="number" id="altura" placeholder="Altura (m)" required>
+
+        <input type="number" id="edad" placeholder="Edad (años)" required>
+
+        <select id="estado" required>
+            <option value="">Seleccione el estado</option>
+            <option>Sano</option>
+            <option>En observacion</option>
+            <option>En riesgo</option>
+        </select>
+
+        <button id="btnRegistrar">
+            Registrar Especie
+        </button>
+    </div>
+    <!-- Fin Forms-->
+
+    <!-- Tabla -->
+    <br><br>
+    <table id="tablaEstadisticas" border="1">
+        <thead>
+            <tr>
+                <th>N</th>
+                <th>Codigo</th>
+                <th>Especie</th>
+                <th>Zona</th>
+                <th>Altura</th>
+                <th>Edad</th>
+                <th>Estado</th>
+                <th>Clasificacion</th>
+            </tr>
+        </thead>
+
+        <tbody id="tablaArboles"></tbody>
+    </table>
+    <!-- Fin Tabla -->
+
+    <!-- Estadisticas -->
+    <h2>Estadisticas</h2>
+
+    <div class = "estadisticas">
+        <p id="totalArboles">
+            Total de especies registradas: 0
+        </p>
+
+        <p id="valorSumaEdades">
+            Suma de edades: 0
+        </p>
+
+        <p id="valorPromedioEdades">
+            Promedio de edades: 0 años
+        </p>
+
+        <p id="mayorAltura">
+            Mayor altura: 0 m
+        </p>
+    </div>
+    <!-- Fin Estadísticas -->
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,77 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f5f7f5;
+    margin: 20px;
+    color: #333;
+}
+
+h1,
+h2 {
+    text-align: center;
+    color: #2e5d34;
+}
+
+.formulario {
+    width: 450px;
+    margin: 20px auto;
+    padding: 15px;
+    background-color: #ffffff;
+    border: 1px solid #b7d3ba;
+    border-radius: 5px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.formulario input,
+.formulario select {
+    padding: 8px;
+    border: 1px solid #b7d3ba;
+    border-radius: 3px;
+}
+
+button {
+    padding: 10px;
+    background-color: #4f8a54;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #3f7144;
+}
+
+table {
+    width: 80%;
+    margin: 20px auto;
+    border-collapse: collapse;
+    background-color: white;
+}
+
+table th,
+table td {
+    border: 1px solid #c8d8ca;
+    padding: 8px;
+    text-align: center;
+}
+
+table th {
+    background-color: #4f8a54;
+    color: white;
+}
+
+.estadisticas {
+    width: 450px;
+    margin: 20px auto;
+    padding: 15px;
+    background-color: white;
+    border: 1px solid #b7d3ba;
+    border-radius: 5px;
+}
+
+.estadisticas p {
+    margin: 8px 0;
+}
