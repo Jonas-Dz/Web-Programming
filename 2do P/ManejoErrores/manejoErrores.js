@@ -40,7 +40,7 @@ Reglas:
 Salida:
 Notas entre 0 y 10: Nota valida
 Notas menores a 0 y mayores a 10: Nota invalida
-*/
+
 
 let nota = Number(prompt("Ingrese una nota: "));
 
@@ -56,4 +56,36 @@ try {
     validarNota(nota);
 } catch (error) {
     console.log(error);
+}
+
+*/
+
+/*
+Ejercicio 2
+Validar una contraseña
+
+Reglas:
+- minimo 8 caracteres
+- al menos 1 numero
+
+Mostrar error usando:
+throw new Error();
+*/
+
+let contrasena = prompt("Ingrese su contraseña: ");
+
+function validarContrasena(contrasena){
+    if(contrasena.length < 8){
+        throw new Error("La contraseña debe tener 8 caracteres minimo");
+    } else if((/\d/.test(contrasena)) === false){
+        throw new Error("La contraseña debe contener al menos 1 numero");
+    } else {
+        console.log("Contraseña valida");
+    }
+}
+
+try {
+    validarContrasena(contrasena);
+} catch (error) {
+    console.log(error.message);
 }
