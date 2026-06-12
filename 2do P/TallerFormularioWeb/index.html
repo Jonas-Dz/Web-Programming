@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Formulario Vinculación</title>
+</head>
+
+<body>
+
+    <form id="formulario">
+
+        <h1>Formulario Vinculación</h1>
+
+        <div>
+            <h2>1. Datos Generales</h2>
+
+            <h3>1.1 Nombre</h3>
+
+            <input type="text" id="nombre">
+
+            <br><br>
+
+            <h3>1.2 Sede</h3>
+
+            <select id="sede">
+
+                <option value="1">
+                    ESPE
+                </option>
+
+                <option value="2">
+                    ESPE Santo Domingo
+                </option>
+
+                <option value="3">
+                    ESPE Latacunga
+                </option>
+
+                <option value="4">
+                    ESMIL
+                </option>
+
+                <option value="5">
+                    ESFORCE
+                </option>
+
+            </select>
+
+            <br><br>
+
+            <h3>1.3 Departamento</h3>
+
+            <select id="departamento">
+
+                <option value="1">
+                    Ciencias Computación
+                </option>
+
+                <option value="2">
+                    Ciencias Tierra
+                </option>
+
+                <option value="3">
+                    Ciencias Vida
+                </option>
+
+                <option value="4">
+                    Ciencias Económicas
+                </option>
+
+                <option value="5">
+                    Ciencias Exactas
+                </option>
+
+                <option value="6">
+                    Ciencias Humanas
+                </option>
+
+                <option value="7">
+                    Ciencias Sociales
+                </option>
+
+            </select>
+
+            <br><br>
+
+            <h3>1.4 Plazo ejecución</h3>
+
+            Inicio
+
+            <br>
+
+            <input type="date">
+
+            <br><br>
+
+            Fin
+
+            <br>
+
+            <input type="date">
+
+            <br><br>
+
+            <h3>1.5 Director</h3>
+
+            Nombre
+
+            <br>
+
+            <input type="text">
+
+            <br><br>
+
+            Correo
+
+            <br>
+
+            <input type="email">
+
+            <br><br>
+
+            Teléfono
+
+            <br>
+
+            <input type="tel">
+
+        </div>
+
+        <br>
+        <hr><br>
+
+        <div>
+
+            <h2>1.6 Localización</h2>
+
+            <h3>1.6.1 Cobertura</h3>
+
+            <input type="checkbox">
+            Internacional
+
+            <br>
+
+            <input type="checkbox">
+            Nacional
+
+            <br>
+
+            <input type="checkbox">
+            Provincial
+
+            <br>
+
+            <input type="checkbox">
+            Cantonal
+
+            <br><br>
+
+            <h3>1.6.2 Ubicación</h3>
+
+            Provincia
+
+            <br>
+
+            <input type="text">
+
+            <br><br>
+
+            Cantón
+
+            <br>
+
+            <input type="text">
+
+            <br><br>
+
+            Parroquia
+
+            <br>
+
+            <input type="text">
+
+            <br><br>
+
+            Barrio
+
+            <br>
+
+            <input type="text">
+
+        </div>
+
+        <br>
+        <hr><br>
+
+        <div>
+
+            <h2>1.7 Sector beneficiario</h2>
+
+            <input type="checkbox">
+            Urbano marginal
+
+            <br>
+
+            <input type="checkbox">
+            Rural
+
+            <br>
+
+            <input type="checkbox">
+            Grupo atención prioritaria
+
+        </div>
+
+        <br>
+        <hr><br>
+
+        <div>
+
+            <h2>2. Alineamiento</h2>
+
+            <h3>2.1 Ámbitos prioritarios</h3>
+
+            Desarrollo Territorial
+
+            <br>
+
+            <input type="checkbox">
+            SI
+
+            <input type="checkbox">
+            NO
+
+            <br><br>
+
+            Sostenibilidad
+
+            <br>
+
+            <input type="checkbox">
+            SI
+
+            <input type="checkbox">
+            NO
+
+            <br><br>
+
+            Innovación Social
+
+            <br>
+
+            <input type="checkbox">
+            SI
+
+            <input type="checkbox">
+            NO
+
+        </div>
+
+        <br>
+        <hr><br>
+
+        <div>
+
+            <h3>2.2 Objetivos ODS</h3>
+
+            Objetivo
+
+            <br>
+
+            <select id="ods" onchange="cambiarMeta()">
+
+                <option value="">
+                    Seleccione
+                </option>
+
+                <option value="ods1">
+                    ODS 1
+                </option>
+
+                <option value="ods2">
+                    ODS 2
+                </option>
+
+                <option value="ods3">
+                    ODS 3
+                </option>
+
+                <option value="ods4">
+                    ODS 4
+                </option>
+
+            </select>
+
+            <br><br>
+
+            Meta
+
+            <br>
+
+            <select id="meta">
+
+                <option>
+                    Seleccione ODS primero
+                </option>
+
+            </select>
+
+        </div>
+
+        <br>
+        <hr><br>
+
+        <div>
+
+            <h3>2.3 CINE UNESCO</h3>
+
+            Campo amplio
+
+            <br>
+
+            <select id="campoAmplio" onchange="cambiarCampo()">
+
+                <option value="">
+                    Seleccione
+                </option>
+
+                <option value="c01">
+                    01
+                </option>
+
+                <option value="c02">
+                    02
+                </option>
+
+                <option value="c03">
+                    03
+                </option>
+
+            </select>
+
+            <br><br>
+
+            Campo específico
+
+            <br>
+
+            <select id="campoEspecifico">
+
+                <option>
+                    Seleccione primero
+                </option>
+
+            </select>
+
+            <br><br>
+
+            Campo detallado
+
+            <br>
+
+            <select id="campoDetallado">
+
+                <option>
+                    Seleccione primero
+                </option>
+
+            </select>
+
+        </div>
+
+        <br>
+        <hr><br>
+
+        <div>
+
+            <h3>2.4 Plan Nacional Desarrollo</h3>
+
+            Objetivo
+
+            <br>
+
+            <select id="objetivo" onchange="cambiarPolitica()">
+
+                <option value="">
+                    Seleccione
+                </option>
+
+                <option value="obj1">
+                    Objetivo 1
+                </option>
+
+                <option value="obj2">
+                    Objetivo 2
+                </option>
+
+                <option value="obj3">
+                    Objetivo 3
+                </option>
+
+            </select>
+
+            <br><br>
+
+            Política
+
+            <br>
+
+            <select id="politica">
+
+                <option>
+                    Seleccione objetivo
+                </option>
+
+            </select>
+
+        </div>
+
+        <br>
+        <hr><br>
+
+        <div>
+
+            <h3>2.5 Objetivos GAD</h3>
+
+            Provincial
+
+            <br>
+
+            <input type="text">
+
+            <br><br>
+
+            Cantonal
+
+            <br>
+
+            <input type="text">
+
+            <br><br>
+
+            Parroquial
+
+            <br>
+
+            <input type="text">
+
+            <br><br>
+
+            Entidad auspiciante
+
+            <br>
+
+            <input type="text">
+
+        </div>
+
+        <br>
+        <hr><br>
+
+        <div>
+
+            <h3>2.6 Plan Estratégico</h3>
+
+            Objetivo
+
+            <br>
+
+            <select id="objetivoPlan" onchange="cambiarEstrategia()">
+
+                <option value="">
+                    Seleccione
+                </option>
+
+                <option value="oe1">
+                    Objetivo 1
+                </option>
+
+                <option value="oe2">
+                    Objetivo 2
+                </option>
+
+                <option value="oe3">
+                    Objetivo 3
+                </option>
+
+            </select>
+
+            <br><br>
+
+            Estrategia
+
+            <br>
+
+            <select id="estrategia">
+
+                <option>
+                    Seleccione objetivo
+                </option>
+
+            </select>
+
+        </div>
+
+        <br><br>
+
+        <button type="button" onclick="mostrarFormulario()">
+            Enviar
+        </button>
+
+        <br><br>
+
+        <hr>
+
+        <h2>Resumen del formulario</h2>
+
+        <div id="resultado">
+        </div>
+    </form>
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
