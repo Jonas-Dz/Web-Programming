@@ -9,15 +9,16 @@ function sumar(a,b){
 }
 */
 
+//Solucion
 let nombre:string = "Juan";
 let edad:number = 25;
 let activo:boolean = true;
 
-function sumar(a:number, b:number){
+function sumar(a:number, b:number):number{
     return a + b;
 }
 
 let a:number = 5;
 let b:number = 6;
 
-sumar(a,b);
+console.log(sumar(a,b))
