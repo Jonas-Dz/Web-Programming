@@ -1,57 +1,114 @@
-interface Docente{
-    nombre:string,
-    asignatura:string,
-    horas:number,
-    activo:boolean
-};
+//=====================================================
+// INTERFACES
+//=====================================================
 
-let docente1:Docente = {
-    nombre: "Juan",
-    asignatura: "Matemáticas",
-    horas: 20,
-    activo: true
-};
-
-let docente2:Docente = {
-    nombre: "Andy",
-    asignatura: "BDD",
-    horas: 10,
-    activo: true
-};
-
-console.log(docente1.nombre);
-console.log(docente2.nombre);
+interface Docente {
+    nombre: string;
+    asignatura: string;
+    horas?: number; // opcional
+    activo: boolean;
+}
 
 /*
-//PROPIEDADES OPCIONALES
+VARIANTE (sin propiedad opcional)
 
-interface Docente{
-    nombre:string,
-    asignatura:string,
-    horas?:number,  //si no se define, se asume que es undefined
-    activo:boolean
-};
+interface Docente {
+    nombre: string;
+    asignatura: string;
+    horas: number;
+    activo: boolean;
+}
+*/
 
-const docente1:Docente = {
+
+//=====================================================
+// OBJETOS
+//=====================================================
+
+const docente1: Docente = {
     nombre: "Juan",
     asignatura: "Matemáticas",
     activo: true
 };
 
-const docente2:Docente = {
+const docente2: Docente = {
     nombre: "Andy",
     asignatura: "BDD",
     horas: 10,
     activo: true
+};
+
+
+/*
+EJEMPLO CON MÉTODO
+
+interface Docente {
+    nombre: string;
+    asignatura: string;
+    horas: number;
+    activo: boolean;
+
+    saludar(): string;
+}
+
+const docente3: Docente = {
+    nombre: "Jonathan",
+    asignatura: "BDD 2",
+    horas: 50,
+    activo: true,
+
+    saludar(): string {
+        return `Hola, soy ${this.nombre}`;
+    }
 };
 */
 
-//Si las joras son mayores o iguales a 8 {es tiempo completo} sino {es tiempo parcial}
 
-console.log(docente1.nombre);
-console.log(docente1.horas);
+//=====================================================
+// FUNCIONES
+//=====================================================
 
-console.log(docente2.nombre);
-console.log(docente2.horas);
+function dedicacion(
+    horas?: number
+): string {
 
-console.log(docente1.horas >= 8 ? "Tiempo completo" : "Tiempo parcial");
+    if (horas === undefined) {
+        return "No se ha definido la cantidad de horas";
+    }
+
+    return horas >= 8
+        ? "Tiempo completo"
+        : "Tiempo parcial";
+}
+
+
+//=====================================================
+// EJECUCIÓN / PRUEBAS
+//=====================================================
+
+console.log("===== DOCENTE 1 =====");
+console.log("Nombre:", docente1.nombre);
+console.log("Horas:", docente1.horas);
+console.log(
+    "Dedicación:",
+    dedicacion(docente1.horas)
+);
+
+
+console.log("\n");
+console.log("===== DOCENTE 2 =====");
+console.log("Nombre:", docente2.nombre);
+console.log("Horas:", docente2.horas);
+console.log(
+    "Dedicación:",
+    dedicacion(docente2.horas)
+);
+
+
+/*
+PRUEBA MÉTODO
+
+console.log(
+    docente3.saludar()
+);
+*/

@@ -10,15 +10,15 @@ function sumar(a,b){
 */
 
 //Solucion
-let nombre:string = "Juan";
-let edad:number = 25;
-let activo:boolean = true;
+let nombre1:string = "Juan";
+let edad1:number = 25;
+let activo1:boolean = true;
 
-function sumar(a:number, b:number):number{
+function sumar1(a1:number, b1:number):number{
     return a + b;
 }
 
-let a:number = 5;
-let b:number = 6;
+let a1:number = 5;
+let b1:number = 6;
 
-console.log(sumar(a,b))
+console.log(sumar1(a1,b1))
