@@ -7,7 +7,7 @@ class Persona{
 
 class Docente extends Persona{
     mostrarNombre():void{
-        console.log('Docente: ${this.nombre}')
+        console.log(`Docente: ${this.nombre}`)
     }
 }
 

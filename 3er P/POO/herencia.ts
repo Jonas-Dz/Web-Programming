@@ -8,7 +8,7 @@ class Persona{
     }
 
     saludar():void{
-        console.log('Hola, mi nombre es ${this.nombre} y tengo ${this.edad} años'); 
+        console.log(`Hola, mi nombre es ${this.nombre} y tengo ${this.edad} años`); 
     }
 }
 
@@ -21,7 +21,7 @@ class Estudiante extends Persona{
     }
 
     mostrarCarrera():void{
-        console.log('Estudio ${this.carrera}');
+        console.log(`Estudio ${this.carrera}`);
     }
 }
 
