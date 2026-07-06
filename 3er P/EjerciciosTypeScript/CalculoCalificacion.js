@@ -24,6 +24,7 @@ console.log("Promedio: ", promedio);
 console.log("Estado: ", estado);
 
 */
+Object.defineProperty(exports, "__esModule", { value: true });
 console.log("======= USANDO FUNCIONES FLECHA ========");
 const calcularNotaFinal = (nota1, nota2, nota3) => {
     return (nota1 + nota2 + nota3) / 3;

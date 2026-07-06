@@ -1,8 +1,6 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 class Estudiante2 {
-    nombre;
-    edad;
-    _notaFinal;
     constructor(nombre, edad, notaFinal) {
         this.nombre = nombre;
         this.edad = edad;

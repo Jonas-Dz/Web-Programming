@@ -9,12 +9,14 @@ function sumar(a,b){
     return a+b;
 }
 */
-let nombre = "Juan";
-let edad = 25;
-let activo = true;
-function sumar(a, b) {
+Object.defineProperty(exports, "__esModule", { value: true });
+//Solucion
+let nombre1 = "Juan";
+let edad1 = 25;
+let activo1 = true;
+function sumar1(a1, b1) {
     return a + b;
 }
-let a = 5;
-let b = 6;
-console.log(sumar(a, b));
+let a1 = 5;
+let b1 = 6;
+console.log(sumar1(a1, b1));

@@ -1,4 +1,5 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 let estudiantes = "Andy";
 let edadEstudiante = 21;
 let matriculado = true;
