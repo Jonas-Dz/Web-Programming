@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<productos>
+    <producto>
+        <codigo>P001</codigo>
+        <nombre>Mouse</nombre>
+        <precio>12.5</precio>
+        <stock>10</stock>
+    </producto>
+
+    <producto>
+        <codigo>P002</codigo>
+        <nombre>Teclado</nombre>
+        <precio>25</precio>
+        <stock>5</stock>
+    </producto>
+
+    <producto>
+        <codigo>P003</codigo>
+        <nombre>Monitor</nombre>
+        <precio>180</precio>
+        <stock>3</stock>
+    </producto>
+</productos>
