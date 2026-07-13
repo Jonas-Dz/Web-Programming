@@ -18,7 +18,7 @@ obtenerDatos().then((
 
 console.log("Fin");
 
-*/
+// Otro ejercicio con promesas y async/await
 
 interface Usuario {
     id: number;
@@ -46,3 +46,5 @@ async function listarUsuarios(): Promise<void> {
 }
 
 listarUsuarios();
+
+*/

@@ -1,0 +1,356 @@
+<!-- Primera version con el codigo index.ts implementado dentro del index.html
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consulta de Usuarios</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f6f9;
+            margin: 0;
+            padding: 30px;
+        }
+
+        h1, h2 {
+            color: #1f2937;
+        }
+
+        .contenedor {
+            max-width: 900px;
+            margin: auto;
+            background-color: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+        }
+
+        .buscador {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 25px;
+        }
+
+        input {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+
+        button {
+            padding: 10px 18px;
+            background-color: #2563eb;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #1d4ed8;
+        }
+
+        .usuario {
+            background-color: #f9fafb;
+            border-left: 5px solid #2563eb;
+            padding: 12px;
+            margin-bottom: 12px;
+            border-radius: 8px;
+        }
+
+        .usuario-encontrado {
+            background-color: #ecfdf5;
+            border-left: 5px solid #16a34a;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 25px;
+        }
+
+        .error {
+            background-color: #fee2e2;
+            color: #991b1b;
+            border-left: 5px solid #dc2626;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .mensaje {
+            color: #4b5563;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="contenedor">
+        <h1>Consulta de Usuarios</h1>
+
+        <div class="buscador">
+            <input 
+                type="number" 
+                id="inputId" 
+                placeholder="Ingrese el ID del usuario"
+                min="1"
+            >
+
+            <button onclick="buscarUsuarioPorId()">
+                Buscar
+            </button>
+        </div>
+
+        <h2>Usuario encontrado</h2>
+        <div id="resultadoUsuario">
+            <p class="mensaje">Ingrese un ID para buscar un usuario.</p>
+        </div>
+
+        <h2>Lista de usuarios</h2>
+        <div id="listaUsuarios">
+            <p class="mensaje">Cargando usuarios...</p>
+        </div>
+    </div>
+
+    <script>
+        const API_URL = "https://jsonplaceholder.typicode.com/users";
+
+        async function obtenerUsuarios() {
+            try {
+                const respuesta = await fetch(API_URL);
+
+                if (!respuesta.ok) {
+                    throw new Error("Error al consultar la API");
+                }
+
+                const usuarios = await respuesta.json();
+                return usuarios;
+
+            } catch (error) {
+                console.error("Ocurrió un error:", error);
+                mostrarError("No se pudieron cargar los usuarios.");
+                return [];
+            }
+        }
+
+        async function listarUsuarios() {
+            const contenedorLista = document.getElementById("listaUsuarios");
+
+            try {
+                const usuarios = await obtenerUsuarios();
+
+                contenedorLista.innerHTML = "";
+
+                usuarios.forEach((usuario) => {
+                    contenedorLista.innerHTML += `
+                        <div class="usuario">
+                            <strong>ID:</strong> ${usuario.id}<br>
+                            <strong>Nombre:</strong> ${usuario.name}<br>
+                            <strong>Usuario:</strong> ${usuario.username}<br>
+                            <strong>Correo:</strong> ${usuario.email}
+                        </div>
+                    `;
+                });
+
+            } catch (error) {
+                contenedorLista.innerHTML = `
+                    <div class="error">
+                        Ocurrió un error al listar los usuarios.
+                    </div>
+                `;
+            }
+        }
+
+        async function buscarUsuarioPorId() {
+            const inputId = document.getElementById("inputId");
+            const resultadoUsuario = document.getElementById("resultadoUsuario");
+
+            const id = inputId.value;
+
+            if (id === "") {
+                resultadoUsuario.innerHTML = `
+                    <div class="error">
+                        Debe ingresar un ID para buscar.
+                    </div>
+                `;
+                return;
+            }
+
+            try {
+                const respuesta = await fetch(`${API_URL}/${id}`);
+
+                if (!respuesta.ok) {
+                    throw new Error("Error al buscar el usuario");
+                }
+
+                const usuario = await respuesta.json();
+
+                if (!usuario.id) {
+                    resultadoUsuario.innerHTML = `
+                        <div class="error">
+                            No existe un usuario con el ID ${id}.
+                        </div>
+                    `;
+                    return;
+                }
+
+                resultadoUsuario.innerHTML = `
+                    <div class="usuario-encontrado">
+                        <strong>ID:</strong> ${usuario.id}<br>
+                        <strong>Nombre:</strong> ${usuario.name}<br>
+                        <strong>Usuario:</strong> ${usuario.username}<br>
+                        <strong>Correo:</strong> ${usuario.email}
+                    </div>
+                `;
+
+            } catch (error) {
+                console.error("Ocurrió un error:", error);
+
+                resultadoUsuario.innerHTML = `
+                    <div class="error">
+                        Ocurrió un error al buscar el usuario.
+                    </div>
+                `;
+            }
+        }
+
+        function mostrarError(mensaje) {
+            const contenedorLista = document.getElementById("listaUsuarios");
+
+            contenedorLista.innerHTML = `
+                <div class="error">
+                    ${mensaje}
+                </div>
+            `;
+        }
+
+        listarUsuarios();
+    </script>
+
+</body>
+</html> 
+-->
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consulta de Usuarios</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f6f9;
+            margin: 0;
+            padding: 30px;
+        }
+
+        h1, h2 {
+            color: #1f2937;
+        }
+
+        .contenedor {
+            max-width: 900px;
+            margin: auto;
+            background-color: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+        }
+
+        .buscador {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 25px;
+        }
+
+        input {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+
+        button {
+            padding: 10px 18px;
+            background-color: #2563eb;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #1d4ed8;
+        }
+
+        .usuario {
+            background-color: #f9fafb;
+            border-left: 5px solid #2563eb;
+            padding: 12px;
+            margin-bottom: 12px;
+            border-radius: 8px;
+        }
+
+        .usuario-encontrado {
+            background-color: #ecfdf5;
+            border-left: 5px solid #16a34a;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 25px;
+        }
+
+        .error {
+            background-color: #fee2e2;
+            color: #991b1b;
+            border-left: 5px solid #dc2626;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .mensaje {
+            color: #4b5563;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="contenedor">
+        <h1>Consulta de Usuarios</h1>
+
+        <div class="buscador">
+            <input 
+                type="number" 
+                id="inputId" 
+                placeholder="Ingrese el ID del usuario"
+                min="1"
+            >
+
+            <button id="btnBuscar">
+                Buscar
+            </button>
+        </div>
+
+        <h2>Usuario encontrado</h2>
+        <div id="resultadoUsuario">
+            <p class="mensaje">Ingrese un ID para buscar un usuario.</p>
+        </div>
+
+        <h2>Lista de usuarios</h2>
+        <div id="listaUsuarios">
+            <p class="mensaje">Cargando usuarios...</p>
+        </div>
+    </div>
+
+    <script src="index.js"></script>
+</body>
+</html>
