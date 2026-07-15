@@ -1,4 +1,5 @@
 /*
+
 // Interfaz que representa la estructura de un usuario
 //Este ejercicio se imprime mediante consola, el index.html implementa aparte el codigo
 interface Usuario {
