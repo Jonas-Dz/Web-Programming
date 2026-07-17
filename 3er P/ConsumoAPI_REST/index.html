@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sistema de Tareas</title>
+    <title>Sistema de Publicaciones</title>
 
     <style>
         :root {
@@ -232,7 +232,7 @@
             border: 1px solid #93c5fd;
         }
 
-        .tarea-encontrada {
+        .publicacion-encontrada {
             display: none;
             margin-top: 16px;
             padding: 16px;
@@ -241,11 +241,11 @@
             background: #eff6ff;
         }
 
-        .tarea-encontrada.visible {
+        .publicacion-encontrada.visible {
             display: block;
         }
 
-        .tarea-encontrada p {
+        .publicacion-encontrada p {
             margin: 7px 0;
         }
 
@@ -283,19 +283,19 @@
 
 <body>
     <header>
-        <h1>Sistema de Tareas</h1>
-        <p>Gestión de tareas mediante la API JSONPlaceholder</p>
+        <h1>Sistema de Publicaciones</h1>
+        <p>Gestión de publicaciones mediante la API JSONPlaceholder</p>
     </header>
 
     <main>
         <div id="mensaje" class="mensaje"></div>
 
         <section class="panel">
-            <h2>1. Listar tareas</h2>
+            <h2>1. Listar publicaciones</h2>
 
             <div class="acciones">
                 <button id="btnListar" class="btn-azul" type="button">
-                    Consultar tareas
+                    Consultar publicaciones
                 </button>
             </div>
 
@@ -306,27 +306,27 @@
                             <th>ID</th>
                             <th>ID del usuario</th>
                             <th>Título</th>
-                            <th>Completada</th>
+                            <th>Contenido</th>
                         </tr>
                     </thead>
 
-                    <tbody id="tablaTareas">
+                    <tbody id="tablaPublicaciones">
                         <tr>
-                            <td colspan="4">Presione “Consultar tareas”.</td>
+                            <td colspan="4">Presione “Consultar publicaciones”.</td>
                         </tr>
                     </tbody>
                 </table>
             </div>
 
-            <div id="contadorTareas" class="contador"></div>
+            <div id="contadorPublicaciones" class="contador"></div>
         </section>
 
         <section class="panel">
-            <h2>2. Buscar tarea por ID</h2>
+            <h2>2. Buscar publicación por ID</h2>
 
             <form id="formBuscar" class="formulario">
                 <div class="campo">
-                    <label for="buscarId">ID de la tarea</label>
+                    <label for="buscarId">ID de la publicación</label>
                     <input
                         id="buscarId"
                         type="number"
@@ -339,16 +339,16 @@
 
                 <div class="campo" style="justify-content: end;">
                     <button class="btn-azul" type="submit">
-                        Buscar tarea
+                        Buscar publicación
                     </button>
                 </div>
             </form>
 
-            <div id="tareaEncontrada" class="tarea-encontrada"></div>
+            <div id="publicacionEncontrada" class="publicacion-encontrada"></div>
         </section>
 
         <section class="panel">
-            <h2>3. Crear tarea</h2>
+            <h2>3. Crear publicación</h2>
 
             <form id="formCrear" class="formulario">
                 <div class="campo">
@@ -364,36 +364,38 @@
                 </div>
 
                 <div class="campo">
-                    <label for="crearCompleted">Estado</label>
-                    <select id="crearCompleted" required>
-                        <option value="false">Pendiente</option>
-                        <option value="true">Completada</option>
-                    </select>
+                    <label for="crearTitle">Título</label>
+                    <input
+                        id="crearTitle"
+                        type="text"
+                        placeholder="Título de la publicación"
+                        required
+                    >
                 </div>
 
                 <div class="campo campo-completo">
-                    <label for="crearTitle">Título</label>
+                    <label for="crearBody">Contenido</label>
                     <textarea
-                        id="crearTitle"
-                        placeholder="Escriba el título de la tarea"
+                        id="crearBody"
+                        placeholder="Contenido de la publicación"
                         required
                     ></textarea>
                 </div>
 
                 <div class="campo campo-completo">
                     <button class="btn-verde" type="submit">
-                        Crear tarea
+                        Crear publicación
                     </button>
                 </div>
             </form>
         </section>
 
         <section class="panel">
-            <h2>4. Actualizar tarea</h2>
+            <h2>4. Actualizar publicación</h2>
 
             <form id="formActualizar" class="formulario">
                 <div class="campo">
-                    <label for="actualizarId">ID de la tarea</label>
+                    <label for="actualizarId">ID de la publicación</label>
                     <input
                         id="actualizarId"
                         type="number"
@@ -416,37 +418,39 @@
                     >
                 </div>
 
-                <div class="campo">
-                    <label for="actualizarCompleted">Nuevo estado</label>
-                    <select id="actualizarCompleted" required>
-                        <option value="false">Pendiente</option>
-                        <option value="true">Completada</option>
-                    </select>
+                <div class="campo campo-completo">
+                    <label for="actualizarTitle">Nuevo título</label>
+                    <input
+                        id="actualizarTitle"
+                        type="text"
+                        placeholder="Nuevo título"
+                        required
+                    >
                 </div>
 
                 <div class="campo campo-completo">
-                    <label for="actualizarTitle">Nuevo título</label>
+                    <label for="actualizarBody">Nuevo contenido</label>
                     <textarea
-                        id="actualizarTitle"
-                        placeholder="Nuevo título de la tarea"
+                        id="actualizarBody"
+                        placeholder="Nuevo contenido de la publicación"
                         required
                     ></textarea>
                 </div>
 
                 <div class="campo campo-completo">
                     <button class="btn-amarillo" type="submit">
-                        Actualizar tarea
+                        Actualizar publicación
                     </button>
                 </div>
             </form>
         </section>
 
         <section class="panel">
-            <h2>5. Eliminar tarea</h2>
+            <h2>5. Eliminar publicación</h2>
 
             <form id="formEliminar" class="formulario">
                 <div class="campo">
-                    <label for="eliminarId">ID de la tarea</label>
+                    <label for="eliminarId">ID de la publicación</label>
                     <input
                         id="eliminarId"
                         type="number"
@@ -459,7 +463,7 @@
 
                 <div class="campo" style="justify-content: end;">
                     <button class="btn-rojo" type="submit">
-                        Eliminar tarea
+                        Eliminar publicación
                     </button>
                 </div>
             </form>
@@ -473,13 +477,13 @@
     <script>
         "use strict";
 
-        // Endpoint de tareas de JSONPlaceholder.
-        const API_URL = "https://jsonplaceholder.typicode.com/todos";
+        // El recurso correcto de JSONPlaceholder es /posts, en plural.
+        const API_URL = "https://jsonplaceholder.typicode.com/posts";
 
         const mensaje = document.getElementById("mensaje");
-        const tablaTareas = document.getElementById("tablaTareas");
-        const contadorTareas = document.getElementById("contadorTareas");
-        const tareaEncontrada = document.getElementById("tareaEncontrada");
+        const tablaPublicaciones = document.getElementById("tablaPublicaciones");
+        const contadorPublicaciones = document.getElementById("contadorPublicaciones");
+        const publicacionEncontrada = document.getElementById("publicacionEncontrada");
         const btnListar = document.getElementById("btnListar");
 
         function escaparHTML(valor) {
@@ -521,19 +525,23 @@
             return id;
         }
 
-        function validarTarea(userIdTexto, titleTexto, completedTexto) {
+        function validarPublicacion(userIdTexto, titleTexto, bodyTexto) {
             const userId = validarId(userIdTexto, "ID del usuario");
             const title = titleTexto.trim();
-            const completed = completedTexto === "true";
+            const body = bodyTexto.trim();
 
             if (title === "") {
-                throw new Error("El título de la tarea es obligatorio.");
+                throw new Error("El título de la publicación es obligatorio.");
+            }
+
+            if (body === "") {
+                throw new Error("El contenido de la publicación es obligatorio.");
             }
 
             return {
                 userId,
                 title,
-                completed
+                body
             };
         }
 
@@ -576,98 +584,94 @@
             mostrarMensaje("Ocurrió un error desconocido.", "error");
         }
 
-        function obtenerEstadoHTML(completed) {
-            if (completed) {
-                return '<span class="estado estado-completada">Sí</span>';
-            }
+        function dibujarTabla(publicaciones) {
+            tablaPublicaciones.innerHTML = "";
+            contadorPublicaciones.textContent = "";
 
-            return '<span class="estado estado-pendiente">No</span>';
-        }
-
-        function dibujarTabla(tareas) {
-            tablaTareas.innerHTML = "";
-            contadorTareas.textContent = "";
-
-            if (!Array.isArray(tareas) || tareas.length === 0) {
-                tablaTareas.innerHTML = `
+            if (!Array.isArray(publicaciones) || publicaciones.length === 0) {
+                tablaPublicaciones.innerHTML = `
                     <tr>
-                        <td colspan="4">No existen tareas registradas.</td>
+                        <td colspan="4">No existen publicaciones registradas.</td>
                     </tr>
                 `;
                 return;
             }
 
-            for (const tarea of tareas) {
+            for (const publicacion of publicaciones) {
                 const fila = document.createElement("tr");
 
                 fila.innerHTML = `
-                    <td>${escaparHTML(tarea.id)}</td>
-                    <td>${escaparHTML(tarea.userId)}</td>
-                    <td>${escaparHTML(tarea.title)}</td>
-                    <td>${obtenerEstadoHTML(tarea.completed)}</td>
+                    <td>${escaparHTML(publicacion.id)}</td>
+                    <td>${escaparHTML(publicacion.userId)}</td>
+                    <td>${escaparHTML(publicacion.title)}</td>
+                    <td>${escaparHTML(publicacion.body)}</td>
                 `;
 
-                tablaTareas.appendChild(fila);
+                tablaPublicaciones.appendChild(fila);
             }
 
-            contadorTareas.textContent = `Total de tareas: ${tareas.length}`;
+            contadorPublicaciones.textContent =
+                `Total de publicaciones: ${publicaciones.length}`;
         }
 
-        function dibujarTareaEncontrada(tarea) {
-            tareaEncontrada.innerHTML = `
-                <h3>Tarea encontrada</h3>
-                <p><strong>ID:</strong> ${escaparHTML(tarea.id)}</p>
-                <p><strong>ID del usuario:</strong> ${escaparHTML(tarea.userId)}</p>
-                <p><strong>Título:</strong> ${escaparHTML(tarea.title)}</p>
-                <p><strong>Completada:</strong> ${tarea.completed ? "Sí" : "No"}</p>
+        function dibujarPublicacionEncontrada(publicacion) {
+            publicacionEncontrada.innerHTML = `
+                <h3>Publicación encontrada</h3>
+                <p><strong>ID:</strong> ${escaparHTML(publicacion.id)}</p>
+                <p><strong>ID del usuario:</strong> ${escaparHTML(publicacion.userId)}</p>
+                <p><strong>Título:</strong> ${escaparHTML(publicacion.title)}</p>
+                <p><strong>Contenido:</strong> ${escaparHTML(publicacion.body)}</p>
             `;
 
-            tareaEncontrada.classList.add("visible");
+            publicacionEncontrada.classList.add("visible");
         }
 
-        async function listarTareas() {
+        async function listarPublicaciones() {
             limpiarMensaje();
             btnListar.disabled = true;
             btnListar.textContent = "Consultando...";
 
             try {
                 const respuesta = await fetch(API_URL);
-                const tareas = await procesarRespuesta(
+                const publicaciones = await procesarRespuesta(
                     respuesta,
-                    "No se pudieron consultar las tareas."
+                    "No se pudieron consultar las publicaciones."
                 );
 
-                dibujarTabla(tareas);
-                mostrarMensaje("Tareas consultadas correctamente.", "exito");
+                dibujarTabla(publicaciones);
+                mostrarMensaje(
+                    "Publicaciones consultadas correctamente.",
+                    "exito"
+                );
             } catch (error) {
                 dibujarTabla([]);
                 manejarError(error);
             } finally {
                 btnListar.disabled = false;
-                btnListar.textContent = "Consultar tareas";
+                btnListar.textContent = "Consultar publicaciones";
             }
         }
 
-        async function buscarTareaPorId(id) {
+        async function buscarPublicacionPorId(id) {
             limpiarMensaje();
-            tareaEncontrada.classList.remove("visible");
-            tareaEncontrada.innerHTML = "";
+            publicacionEncontrada.classList.remove("visible");
+            publicacionEncontrada.innerHTML = "";
 
             try {
                 const respuesta = await fetch(`${API_URL}/${id}`);
 
                 if (respuesta.status === 404) {
-                    throw new Error(`No existe una tarea con el ID ${id}.`);
+                    throw new Error(`No existe una publicación con el ID ${id}.`);
                 }
 
-                const tarea = await procesarRespuesta(
+                const publicacion = await procesarRespuesta(
                     respuesta,
-                    "No se pudo consultar la tarea."
+                    "No se pudo consultar la publicación."
                 );
 
-                dibujarTareaEncontrada(tarea);
+                dibujarPublicacionEncontrada(publicacion);
                 mostrarMensaje(
-                    `Tarea con ID ${id} encontrada correctamente.`,
+                    `Publicación con ID ${id} encontrada correctamente.`,
                     "exito"
                 );
             } catch (error) {
@@ -675,7 +679,7 @@
             }
         }
 
-        async function crearTarea(tarea) {
+        async function crearPublicacion(publicacion) {
             limpiarMensaje();
 
             try {
@@ -684,16 +688,16 @@
                     headers: {
                         "Content-Type": "application/json"
                     },
-                    body: JSON.stringify(tarea)
+                    body: JSON.stringify(publicacion)
                 });
 
-                const tareaCreada = await procesarRespuesta(
+                const publicacionCreada = await procesarRespuesta(
                     respuesta,
-                    "No se pudo crear la tarea."
+                    "No se pudo crear la publicación."
                 );
 
                 mostrarMensaje(
-                    `Tarea creada correctamente con ID ${tareaCreada.id}.`,
+                    `Publicación creada correctamente con ID ${publicacionCreada.id}.`,
                     "exito"
                 );
 
@@ -703,7 +707,7 @@
             }
         }
 
-        async function actualizarTarea(id, tarea) {
+        async function actualizarPublicacion(id, publicacion) {
             limpiarMensaje();
 
             try {
@@ -714,21 +718,21 @@
                     },
                     body: JSON.stringify({
                         id,
-                        ...tarea
+                        ...publicacion
                     })
                 });
 
                 if (respuesta.status === 404) {
-                    throw new Error(`No existe una tarea con el ID ${id}.`);
+                    throw new Error(`No existe una publicación con el ID ${id}.`);
                 }
 
                 await procesarRespuesta(
                     respuesta,
-                    "No se pudo actualizar la tarea."
+                    "No se pudo actualizar la publicación."
                 );
 
                 mostrarMensaje(
-                    `Tarea con ID ${id} actualizada correctamente.`,
+                    `Publicación con ID ${id} actualizada correctamente.`,
                     "exito"
                 );
 
@@ -738,11 +742,11 @@
             }
         }
 
-        async function eliminarTarea(id) {
+        async function eliminarPublicacion(id) {
             limpiarMensaje();
 
             const confirmado = window.confirm(
-                `¿Está seguro de eliminar la tarea con ID ${id}?`
+                `¿Está seguro de eliminar la publicación con ID ${id}?`
             );
 
             if (!confirmado) {
@@ -756,16 +760,16 @@
                 });
 
                 if (respuesta.status === 404) {
-                    throw new Error(`No existe una tarea con el ID ${id}.`);
+                    throw new Error(`No existe una publicación con el ID ${id}.`);
                 }
 
                 await procesarRespuesta(
                     respuesta,
-                    "No se pudo eliminar la tarea."
+                    "No se pudo eliminar la publicación."
                 );
 
                 mostrarMensaje(
-                    `Tarea con ID ${id} eliminada correctamente.`,
+                    `Publicación con ID ${id} eliminada correctamente.`,
                     "exito"
                 );
 
@@ -775,7 +779,7 @@
             }
         }
 
-        btnListar.addEventListener("click", listarTareas);
+        btnListar.addEventListener("click", listarPublicaciones);
 
         document
             .getElementById("formBuscar")
@@ -785,10 +789,10 @@
                 try {
                     const id = validarId(
                         document.getElementById("buscarId").value,
-                        "ID de la tarea"
+                        "ID de la publicación"
                     );
 
-                    await buscarTareaPorId(id);
+                    await buscarPublicacionPorId(id);
                 } catch (error) {
                     manejarError(error);
                 }
@@ -800,13 +804,13 @@
                 evento.preventDefault();
 
                 try {
-                    const tarea = validarTarea(
+                    const publicacion = validarPublicacion(
                         document.getElementById("crearUserId").value,
                         document.getElementById("crearTitle").value,
-                        document.getElementById("crearCompleted").value
+                        document.getElementById("crearBody").value
                     );
 
-                    await crearTarea(tarea);
+                    await crearPublicacion(publicacion);
                 } catch (error) {
                     manejarError(error);
                 }
@@ -820,16 +824,16 @@
                 try {
                     const id = validarId(
                         document.getElementById("actualizarId").value,
-                        "ID de la tarea"
+                        "ID de la publicación"
                     );
 
-                    const tarea = validarTarea(
+                    const publicacion = validarPublicacion(
                         document.getElementById("actualizarUserId").value,
                         document.getElementById("actualizarTitle").value,
-                        document.getElementById("actualizarCompleted").value
+                        document.getElementById("actualizarBody").value
                     );
 
-                    await actualizarTarea(id, tarea);
+                    await actualizarPublicacion(id, publicacion);
                 } catch (error) {
                     manejarError(error);
                 }
@@ -843,17 +847,17 @@
                 try {
                     const id = validarId(
                         document.getElementById("eliminarId").value,
-                        "ID de la tarea"
+                        "ID de la publicación"
                     );
 
-                    await eliminarTarea(id);
+                    await eliminarPublicacion(id);
                 } catch (error) {
                     manejarError(error);
                 }
             });
 
-        // Consulta las tareas automáticamente al abrir la página.
-        window.addEventListener("DOMContentLoaded", listarTareas);
+        // Consulta las publicaciones automáticamente al abrir la página.
+        window.addEventListener("DOMContentLoaded", listarPublicaciones);
     </script>
 </body>
 </html>
