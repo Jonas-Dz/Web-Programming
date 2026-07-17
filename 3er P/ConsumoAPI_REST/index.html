@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sistema de Publicaciones</title>
+    <title>Gestión de Publicaciones</title>
 
     <style>
         :root {
-            --azul: #38393b;
-            --azul-oscuro: #1b1f2a;
-            --verde: #16a34a;
+            --azul: #374151;
+            --azul-oscuro: #111827;
+            --verde: #15803d;
             --rojo: #dc2626;
             --amarillo: #d97706;
             --gris-claro: #f3f4f6;
@@ -31,15 +31,15 @@
         }
 
         header {
-            background: linear-gradient(135deg, var(--azul-oscuro), var(--azul));
-            color: var(--blanco);
-            padding: 28px 20px;
+            padding: 30px 20px;
             text-align: center;
+            color: var(--blanco);
+            background: linear-gradient(135deg, var(--azul-oscuro), var(--azul));
         }
 
         header h1 {
             margin: 0 0 8px;
-            font-size: clamp(1.8rem, 4vw, 2.8rem);
+            font-size: clamp(1.9rem, 4vw, 2.8rem);
         }
 
         header p {
@@ -53,63 +53,16 @@
         }
 
         .panel {
-            background: var(--blanco);
-            border-radius: 14px;
-            padding: 22px;
             margin-bottom: 22px;
+            padding: 22px;
+            border-radius: 14px;
+            background: var(--blanco);
             box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
         }
 
         .panel h2 {
             margin-top: 0;
             color: var(--azul-oscuro);
-        }
-
-        .acciones {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 12px;
-        }
-
-        button {
-            border: none;
-            border-radius: 8px;
-            padding: 11px 17px;
-            font-size: 0.95rem;
-            font-weight: bold;
-            cursor: pointer;
-            transition: transform 0.15s ease, opacity 0.15s ease;
-        }
-
-        button:hover {
-            transform: translateY(-1px);
-            opacity: 0.92;
-        }
-
-        button:disabled {
-            cursor: not-allowed;
-            opacity: 0.55;
-            transform: none;
-        }
-
-        .btn-azul {
-            background: var(--azul);
-            color: var(--blanco);
-        }
-
-        .btn-verde {
-            background: var(--verde);
-            color: var(--blanco);
-        }
-
-        .btn-amarillo {
-            background: var(--amarillo);
-            color: var(--blanco);
-        }
-
-        .btn-rojo {
-            background: var(--rojo);
-            color: var(--blanco);
         }
 
         .formulario {
@@ -128,125 +81,120 @@
             grid-column: 1 / -1;
         }
 
+        .acciones {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            align-items: end;
+        }
+
         label {
             font-weight: bold;
             color: var(--gris-texto);
         }
 
         input,
-        textarea,
-        select {
+        textarea {
             width: 100%;
+            padding: 11px 12px;
             border: 1px solid var(--gris-borde);
             border-radius: 8px;
-            padding: 11px 12px;
-            font-size: 1rem;
+            font: inherit;
             outline: none;
-            background: var(--blanco);
         }
 
         textarea {
-            min-height: 90px;
+            min-height: 100px;
             resize: vertical;
         }
 
         input:focus,
-        textarea:focus,
-        select:focus {
+        textarea:focus {
             border-color: var(--azul);
-            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+            box-shadow: 0 0 0 3px rgba(55, 65, 81, 0.15);
         }
 
-        .tabla-contenedor {
-            overflow-x: auto;
-            margin-top: 18px;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            min-width: 700px;
-        }
-
-        th,
-        td {
-            border-bottom: 1px solid var(--gris-borde);
-            padding: 12px;
-            text-align: left;
-        }
-
-        th {
-            background: #eff6ff;
-            color: var(--azul-oscuro);
-        }
-
-        tr:hover td {
-            background: #f9fafb;
-        }
-
-        .estado {
-            display: inline-block;
-            padding: 5px 9px;
-            border-radius: 999px;
-            font-size: 0.85rem;
+        button {
+            padding: 11px 17px;
+            border: none;
+            border-radius: 8px;
+            color: var(--blanco);
+            font-size: 0.95rem;
             font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.15s ease, opacity 0.15s ease;
         }
 
-        .estado-completada {
-            background: #dcfce7;
-            color: #166534;
+        button:hover {
+            transform: translateY(-1px);
+            opacity: 0.92;
         }
 
-        .estado-pendiente {
-            background: #fef3c7;
-            color: #92400e;
+        button:disabled {
+            cursor: not-allowed;
+            opacity: 0.55;
+            transform: none;
         }
+
+        .btn-azul { background: var(--azul); }
+        .btn-verde { background: var(--verde); }
+        .btn-amarillo { background: var(--amarillo); }
+        .btn-rojo { background: var(--rojo); }
 
         .mensaje {
             display: none;
             margin-bottom: 20px;
-            border-radius: 9px;
             padding: 13px 15px;
+            border-radius: 9px;
             font-weight: bold;
         }
 
-        .mensaje.visible {
-            display: block;
-        }
+        .mensaje.visible { display: block; }
 
         .mensaje.exito {
-            background: #dcfce7;
             color: #166534;
             border: 1px solid #86efac;
+            background: #dcfce7;
         }
 
         .mensaje.error {
-            background: #fee2e2;
             color: #991b1b;
             border: 1px solid #fca5a5;
+            background: #fee2e2;
         }
 
         .mensaje.info {
-            background: #dbeafe;
             color: #1e3a8a;
             border: 1px solid #93c5fd;
+            background: #dbeafe;
         }
 
-        .publicacion-encontrada {
-            display: none;
-            margin-top: 16px;
-            padding: 16px;
-            border-left: 5px solid var(--azul);
-            border-radius: 8px;
-            background: #eff6ff;
+        .tabla-contenedor {
+            margin-top: 18px;
+            overflow-x: auto;
         }
 
-        .publicacion-encontrada.visible {
-            display: block;
+        table {
+            width: 100%;
+            min-width: 800px;
+            border-collapse: collapse;
         }
 
-        .publicacion-encontrada p {
-            margin: 7px 0;
+        th,
+        td {
+            padding: 12px;
+            border-bottom: 1px solid var(--gris-borde);
+            text-align: left;
+            vertical-align: top;
+        }
+
+        th {
+            color: var(--azul-oscuro);
+            background: #eef2ff;
+        }
+
+        tr:hover td {
+            background: #f9fafb;
         }
 
         .contador {
@@ -255,10 +203,38 @@
             font-weight: bold;
         }
 
+        .resultado {
+            display: none;
+            margin-top: 16px;
+            padding: 16px;
+            border-left: 5px solid var(--azul);
+            border-radius: 8px;
+            background: #eef2ff;
+        }
+
+        .resultado.visible {
+            display: block;
+        }
+
+        .resultado h3 {
+            margin: 0 0 12px;
+        }
+
+        .resultado p {
+            margin: 7px 0;
+            white-space: pre-wrap;
+        }
+
         .nota {
-            margin-top: 12px;
+            margin: 12px 0 0;
             color: var(--gris-texto);
             font-size: 0.92rem;
+        }
+
+        code {
+            padding: 2px 5px;
+            border-radius: 4px;
+            background: #e5e7eb;
         }
 
         @media (max-width: 700px) {
@@ -283,19 +259,19 @@
 
 <body>
     <header>
-        <h1>Sistema de Publicaciones</h1>
-        <p>Gestión de publicaciones mediante la API JSONPlaceholder</p>
+        <h1>Gestión de Publicaciones</h1>
+        <p>Consumo del recurso <strong>/posts</strong> de JSONPlaceholder</p>
     </header>
 
     <main>
-        <div id="mensaje" class="mensaje"></div>
+        <div id="mensaje" class="mensaje" role="alert" aria-live="polite"></div>
 
         <section class="panel">
-            <h2>1. Listar publicaciones</h2>
+            <h2>1. Obtener publicaciones</h2>
 
             <div class="acciones">
                 <button id="btnListar" class="btn-azul" type="button">
-                    Consultar publicaciones
+                    Consultar todas
                 </button>
             </div>
 
@@ -303,16 +279,15 @@
                 <table>
                     <thead>
                         <tr>
-                            <th>ID</th>
-                            <th>ID del usuario</th>
+                            <th>ID publicación</th>
+                            <th>ID usuario</th>
                             <th>Título</th>
                             <th>Contenido</th>
                         </tr>
                     </thead>
-
                     <tbody id="tablaPublicaciones">
                         <tr>
-                            <td colspan="4">Presione “Consultar publicaciones”.</td>
+                            <td colspan="4">Presione “Consultar todas”.</td>
                         </tr>
                     </tbody>
                 </table>
@@ -322,7 +297,38 @@
         </section>
 
         <section class="panel">
-            <h2>2. Buscar publicación por ID</h2>
+            <h2>2. Filtrar publicaciones por usuario</h2>
+
+            <form id="formFiltrar" class="formulario">
+                <div class="campo">
+                    <label for="filtrarUserId">ID del usuario</label>
+                    <input
+                        id="filtrarUserId"
+                        type="number"
+                        min="1"
+                        step="1"
+                        placeholder="Ejemplo: 1"
+                        required
+                    >
+                </div>
+
+                <div class="acciones">
+                    <button id="btnFiltrar" class="btn-azul" type="submit">
+                        Filtrar por usuario
+                    </button>
+                    <button id="btnQuitarFiltro" class="btn-amarillo" type="button">
+                        Quitar filtro
+                    </button>
+                </div>
+            </form>
+
+            <p class="nota">
+                La consulta utiliza el parámetro <code>?userId=valor</code>.
+            </p>
+        </section>
+
+        <section class="panel">
+            <h2>3. Consultar una publicación por ID</h2>
 
             <form id="formBuscar" class="formulario">
                 <div class="campo">
@@ -337,18 +343,18 @@
                     >
                 </div>
 
-                <div class="campo" style="justify-content: end;">
-                    <button class="btn-azul" type="submit">
+                <div class="acciones">
+                    <button id="btnBuscar" class="btn-azul" type="submit">
                         Buscar publicación
                     </button>
                 </div>
             </form>
 
-            <div id="publicacionEncontrada" class="publicacion-encontrada"></div>
+            <div id="resultadoBuscar" class="resultado"></div>
         </section>
 
         <section class="panel">
-            <h2>3. Crear publicación</h2>
+            <h2>4. Crear una publicación con POST</h2>
 
             <form id="formCrear" class="formulario">
                 <div class="campo">
@@ -368,6 +374,7 @@
                     <input
                         id="crearTitle"
                         type="text"
+                        maxlength="200"
                         placeholder="Título de la publicación"
                         required
                     >
@@ -383,15 +390,17 @@
                 </div>
 
                 <div class="campo campo-completo">
-                    <button class="btn-verde" type="submit">
+                    <button id="btnCrear" class="btn-verde" type="submit">
                         Crear publicación
                     </button>
                 </div>
             </form>
+
+            <div id="resultadoCrear" class="resultado"></div>
         </section>
 
         <section class="panel">
-            <h2>4. Actualizar publicación</h2>
+            <h2>5. Actualizar solamente el título con PATCH</h2>
 
             <form id="formActualizar" class="formulario">
                 <div class="campo">
@@ -407,46 +416,32 @@
                 </div>
 
                 <div class="campo">
-                    <label for="actualizarUserId">Nuevo ID del usuario</label>
-                    <input
-                        id="actualizarUserId"
-                        type="number"
-                        min="1"
-                        step="1"
-                        placeholder="Ejemplo: 1"
-                        required
-                    >
-                </div>
-
-                <div class="campo campo-completo">
                     <label for="actualizarTitle">Nuevo título</label>
                     <input
                         id="actualizarTitle"
                         type="text"
+                        maxlength="200"
                         placeholder="Nuevo título"
                         required
                     >
                 </div>
 
                 <div class="campo campo-completo">
-                    <label for="actualizarBody">Nuevo contenido</label>
-                    <textarea
-                        id="actualizarBody"
-                        placeholder="Nuevo contenido de la publicación"
-                        required
-                    ></textarea>
-                </div>
-
-                <div class="campo campo-completo">
-                    <button class="btn-amarillo" type="submit">
-                        Actualizar publicación
+                    <button id="btnActualizar" class="btn-amarillo" type="submit">
+                        Actualizar título
                     </button>
                 </div>
             </form>
+
+            <p class="nota">
+                La solicitud PATCH envía únicamente el campo <code>title</code>.
+            </p>
+
+            <div id="resultadoActualizar" class="resultado"></div>
         </section>
 
         <section class="panel">
-            <h2>5. Eliminar publicación</h2>
+            <h2>6. Simular eliminación con DELETE</h2>
 
             <form id="formEliminar" class="formulario">
                 <div class="campo">
@@ -461,15 +456,15 @@
                     >
                 </div>
 
-                <div class="campo" style="justify-content: end;">
-                    <button class="btn-rojo" type="submit">
+                <div class="acciones">
+                    <button id="btnEliminar" class="btn-rojo" type="submit">
                         Eliminar publicación
                     </button>
                 </div>
             </form>
 
             <p class="nota">
-                JSONPlaceholder simula las operaciones POST, PUT y DELETE, pero no guarda los cambios permanentemente.
+                JSONPlaceholder simula POST, PATCH y DELETE, pero no guarda los cambios permanentemente.
             </p>
         </section>
     </main>
@@ -477,17 +472,15 @@
     <script>
         "use strict";
 
-        // El recurso correcto de JSONPlaceholder es /posts, en plural.
         const API_URL = "https://jsonplaceholder.typicode.com/posts";
+        const TIEMPO_LIMITE_MS = 10000;
 
         const mensaje = document.getElementById("mensaje");
         const tablaPublicaciones = document.getElementById("tablaPublicaciones");
         const contadorPublicaciones = document.getElementById("contadorPublicaciones");
-        const publicacionEncontrada = document.getElementById("publicacionEncontrada");
-        const btnListar = document.getElementById("btnListar");
 
         function escaparHTML(valor) {
-            return String(valor)
+            return String(valor ?? "")
                 .replaceAll("&", "&amp;")
                 .replaceAll("<", "&lt;")
                 .replaceAll(">", "&gt;")
@@ -498,11 +491,7 @@
         function mostrarMensaje(texto, tipo = "info") {
             mensaje.textContent = texto;
             mensaje.className = `mensaje visible ${tipo}`;
-
-            window.scrollTo({
-                top: 0,
-                behavior: "smooth"
-            });
+            mensaje.scrollIntoView({ behavior: "smooth", block: "start" });
         }
 
         function limpiarMensaje() {
@@ -510,90 +499,110 @@
             mensaje.className = "mensaje";
         }
 
-        function validarId(valor, nombreCampo = "ID") {
-            const id = Number(valor);
+        function validarEnteroPositivo(valor, nombreCampo) {
+            const numero = Number(valor);
 
             if (
                 valor === "" ||
-                Number.isNaN(id) ||
-                id <= 0 ||
-                !Number.isInteger(id)
+                Number.isNaN(numero) ||
+                !Number.isInteger(numero) ||
+                numero <= 0
             ) {
-                throw new Error(`${nombreCampo}: debe ingresar un número entero mayor que cero.`);
+                throw new Error(`${nombreCampo} debe ser un número entero mayor que cero.`);
             }
 
-            return id;
+            return numero;
         }
 
-        function validarPublicacion(userIdTexto, titleTexto, bodyTexto) {
-            const userId = validarId(userIdTexto, "ID del usuario");
-            const title = titleTexto.trim();
-            const body = bodyTexto.trim();
+        function validarTexto(valor, nombreCampo) {
+            const texto = valor.trim();
 
-            if (title === "") {
-                throw new Error("El título de la publicación es obligatorio.");
+            if (texto === "") {
+                throw new Error(`${nombreCampo} es obligatorio.`);
             }
 
-            if (body === "") {
-                throw new Error("El contenido de la publicación es obligatorio.");
-            }
-
-            return {
-                userId,
-                title,
-                body
-            };
+            return texto;
         }
 
-        async function procesarRespuesta(respuesta, mensajeGeneral) {
-            let datos = null;
-            const tipoContenido = respuesta.headers.get("content-type");
+        async function solicitar(url, opciones = {}, mensajeError = "La solicitud no pudo completarse.") {
+            const controlador = new AbortController();
+            const temporizador = setTimeout(() => controlador.abort(), TIEMPO_LIMITE_MS);
 
-            if (tipoContenido && tipoContenido.includes("application/json")) {
-                datos = await respuesta.json();
+            try {
+                const respuesta = await fetch(url, {
+                    ...opciones,
+                    signal: controlador.signal,
+                    headers: {
+                        Accept: "application/json",
+                        ...(opciones.body ? { "Content-Type": "application/json" } : {}),
+                        ...(opciones.headers ?? {})
+                    }
+                });
+
+                const textoRespuesta = await respuesta.text();
+                let datos = null;
+
+                if (textoRespuesta !== "") {
+                    try {
+                        datos = JSON.parse(textoRespuesta);
+                    } catch {
+                        datos = textoRespuesta;
+                    }
+                }
+
+                if (!respuesta.ok) {
+                    const detalle =
+                        typeof datos === "object" && datos !== null
+                            ? datos.message || datos.error
+                            : null;
+
+                    throw new Error(
+                        detalle || `${mensajeError} HTTP ${respuesta.status} ${respuesta.statusText}.`
+                    );
+                }
+
+                return datos;
+            } catch (error) {
+                if (error.name === "AbortError") {
+                    throw new Error("La solicitud tardó demasiado y fue cancelada.");
+                }
+
+                if (error instanceof TypeError) {
+                    throw new Error(
+                        "No fue posible conectarse con la API. Verifique su conexión a Internet."
+                    );
+                }
+
+                throw error;
+            } finally {
+                clearTimeout(temporizador);
             }
-
-            if (!respuesta.ok) {
-                const mensajeApi =
-                    datos?.message ||
-                    datos?.error ||
-                    `${mensajeGeneral} Código: ${respuesta.status}`;
-
-                throw new Error(mensajeApi);
-            }
-
-            return datos;
         }
 
         function manejarError(error) {
             console.error(error);
-
-            if (error instanceof TypeError) {
-                mostrarMensaje(
-                    "Error de conexión. Verifique su conexión a Internet y el acceso a la API.",
-                    "error"
-                );
-                return;
-            }
-
-            if (error instanceof Error) {
-                mostrarMensaje(error.message, "error");
-                return;
-            }
-
-            mostrarMensaje("Ocurrió un error desconocido.", "error");
+            mostrarMensaje(
+                error instanceof Error ? error.message : "Ocurrió un error desconocido.",
+                "error"
+            );
         }
 
-        function dibujarTabla(publicaciones) {
+        function configurarBoton(boton, cargando, textoNormal, textoCargando) {
+            boton.disabled = cargando;
+            boton.textContent = cargando ? textoCargando : textoNormal;
+        }
+
+        function dibujarTabla(publicaciones, descripcion = "") {
             tablaPublicaciones.innerHTML = "";
             contadorPublicaciones.textContent = "";
 
             if (!Array.isArray(publicaciones) || publicaciones.length === 0) {
                 tablaPublicaciones.innerHTML = `
                     <tr>
-                        <td colspan="4">No existen publicaciones registradas.</td>
+                        <td colspan="4">No se encontraron publicaciones.</td>
                     </tr>
                 `;
+                contadorPublicaciones.textContent = descripcion;
                 return;
             }
 
@@ -611,142 +620,195 @@
             }
 
             contadorPublicaciones.textContent =
-                `Total de publicaciones: ${publicaciones.length}`;
+                `${descripcion ? `${descripcion} — ` : ""}` +
+                `Total: ${publicaciones.length} publicación(es).`;
         }
 
-        function dibujarPublicacionEncontrada(publicacion) {
-            publicacionEncontrada.innerHTML = `
-                <h3>Publicación encontrada</h3>
-                <p><strong>ID:</strong> ${escaparHTML(publicacion.id)}</p>
+        function mostrarPublicacion(contenedorId, tituloResultado, publicacion) {
+            const contenedor = document.getElementById(contenedorId);
+
+            contenedor.innerHTML = `
+                <h3>${escaparHTML(tituloResultado)}</h3>
+                <p><strong>ID de la publicación:</strong> ${escaparHTML(publicacion.id)}</p>
                 <p><strong>ID del usuario:</strong> ${escaparHTML(publicacion.userId)}</p>
                 <p><strong>Título:</strong> ${escaparHTML(publicacion.title)}</p>
                 <p><strong>Contenido:</strong> ${escaparHTML(publicacion.body)}</p>
             `;
 
-            publicacionEncontrada.classList.add("visible");
+            contenedor.classList.add("visible");
+        }
+
+        function ocultarResultado(contenedorId) {
+            const contenedor = document.getElementById(contenedorId);
+            contenedor.innerHTML = "";
+            contenedor.classList.remove("visible");
         }
 
         async function listarPublicaciones() {
+            const boton = document.getElementById("btnListar");
             limpiarMensaje();
-            btnListar.disabled = true;
-            btnListar.textContent = "Consultando...";
+            configurarBoton(boton, true, "Consultar todas", "Consultando...");
 
             try {
-                const respuesta = await fetch(API_URL);
-                const publicaciones = await procesarRespuesta(
-                    respuesta,
-                    "No se pudieron consultar las publicaciones."
+                const publicaciones = await solicitar(
+                    API_URL,
+                    {},
+                    "No se pudieron obtener las publicaciones."
                 );
 
-                dibujarTabla(publicaciones);
-                mostrarMensaje(
-                    "Publicaciones consultadas correctamente.",
-                    "exito"
-                );
+                dibujarTabla(publicaciones, "Todas las publicaciones");
+                mostrarMensaje("Publicaciones obtenidas correctamente.", "exito");
             } catch (error) {
-                dibujarTabla([]);
+                dibujarTabla([], "Error durante la consulta");
                 manejarError(error);
             } finally {
-                btnListar.disabled = false;
-                btnListar.textContent = "Consultar publicaciones";
+                configurarBoton(boton, false, "Consultar todas", "Consultando...");
+            }
+        }
+
+        async function filtrarPublicacionesPorUsuario(userId) {
+            const boton = document.getElementById("btnFiltrar");
+            limpiarMensaje();
+            configurarBoton(boton, true, "Filtrar por usuario", "Filtrando...");
+
+            try {
+                const url = `${API_URL}?userId=${encodeURIComponent(userId)}`;
+                const publicaciones = await solicitar(
+                    url,
+                    {},
+                    `No se pudieron obtener las publicaciones del usuario ${userId}.`
+                );
+
+                dibujarTabla(publicaciones, `Filtro aplicado: usuario ${userId}`);
+
+                if (publicaciones.length === 0) {
+                    mostrarMensaje(
+                        `No se encontraron publicaciones para el usuario ${userId}.`,
+                        "info"
+                    );
+                } else {
+                    mostrarMensaje(
+                        `Se encontraron ${publicaciones.length} publicaciones del usuario ${userId}.`,
+                        "exito"
+                    );
+                }
+            } catch (error) {
+                dibujarTabla([], `Filtro: usuario ${userId}`);
+                manejarError(error);
+            } finally {
+                configurarBoton(boton, false, "Filtrar por usuario", "Filtrando...");
             }
         }
 
         async function buscarPublicacionPorId(id) {
+            const boton = document.getElementById("btnBuscar");
             limpiarMensaje();
-            publicacionEncontrada.classList.remove("visible");
-            publicacionEncontrada.innerHTML = "";
+            ocultarResultado("resultadoBuscar");
+            configurarBoton(boton, true, "Buscar publicación", "Buscando...");
 
             try {
-                const respuesta = await fetch(`${API_URL}/${id}`);
-
-                if (respuesta.status === 404) {
-                    throw new Error(`No existe una publicación con el ID ${id}.`);
-                }
-
-                const publicacion = await procesarRespuesta(
-                    respuesta,
-                    "No se pudo consultar la publicación."
+                const publicacion = await solicitar(
+                    `${API_URL}/${id}`,
+                    {},
+                    `No se pudo consultar la publicación ${id}.`
                 );
 
-                dibujarPublicacionEncontrada(publicacion);
-                mostrarMensaje(
-                    `Publicación con ID ${id} encontrada correctamente.`,
-                    "exito"
-                );
+                mostrarPublicacion("resultadoBuscar", "Publicación encontrada", publicacion);
+                mostrarMensaje(`Publicación ${id} encontrada correctamente.`, "exito");
             } catch (error) {
                 manejarError(error);
+            } finally {
+                configurarBoton(boton, false, "Buscar publicación", "Buscando...");
             }
         }
 
         async function crearPublicacion(publicacion) {
+            const boton = document.getElementById("btnCrear");
             limpiarMensaje();
+            ocultarResultado("resultadoCrear");
+            configurarBoton(boton, true, "Crear publicación", "Creando...");
 
             try {
-                const respuesta = await fetch(API_URL, {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json"
+                const publicacionCreada = await solicitar(
+                    API_URL,
+                    {
+                        method: "POST",
+                        body: JSON.stringify(publicacion)
                     },
-                    body: JSON.stringify(publicacion)
-                });
-
-                const publicacionCreada = await procesarRespuesta(
-                    respuesta,
                     "No se pudo crear la publicación."
                 );
 
+                mostrarPublicacion(
+                    "resultadoCrear",
+                    "Publicación creada por la API",
+                    publicacionCreada
+                );
                 mostrarMensaje(
-                    `Publicación creada correctamente con ID ${publicacionCreada.id}.`,
+                    `Publicación creada correctamente con el ID simulado ${publicacionCreada.id}.`,
                     "exito"
                 );
-
                 document.getElementById("formCrear").reset();
             } catch (error) {
                 manejarError(error);
+            } finally {
+                configurarBoton(boton, false, "Crear publicación", "Creando...");
             }
         }
 
-        async function actualizarPublicacion(id, publicacion) {
+        async function actualizarTitulo(id, nuevoTitulo) {
+            const boton = document.getElementById("btnActualizar");
             limpiarMensaje();
+            ocultarResultado("resultadoActualizar");
+            configurarBoton(boton, true, "Actualizar título", "Actualizando...");
 
             try {
-                const respuesta = await fetch(`${API_URL}/${id}`, {
-                    method: "PUT",
-                    headers: {
-                        "Content-Type": "application/json"
-                    },
-                    body: JSON.stringify({
-                        id,
-                        ...publicacion
-                    })
-                });
-
-                if (respuesta.status === 404) {
-                    throw new Error(`No existe una publicación con el ID ${id}.`);
-                }
-
-                await procesarRespuesta(
-                    respuesta,
-                    "No se pudo actualizar la publicación."
+                // Se consulta primero la publicación para poder mostrar todos sus campos.
+                const publicacionOriginal = await solicitar(
+                    `${API_URL}/${id}`,
+                    {},
+                    `No se pudo consultar la publicación ${id} antes de actualizarla.`
                 );
 
+                // PATCH modifica parcialmente el recurso y envía únicamente el título.
+                const respuestaPatch = await solicitar(
+                    `${API_URL}/${id}`,
+                    {
+                        method: "PATCH",
+                        body: JSON.stringify({ title: nuevoTitulo })
+                    },
+                    `No se pudo actualizar el título de la publicación ${id}.`
+                );
+
+                const publicacionActualizada = {
+                    ...publicacionOriginal,
+                    ...respuestaPatch,
+                    id,
+                    title: nuevoTitulo
+                };
+
+                mostrarPublicacion(
+                    "resultadoActualizar",
+                    "Publicación actualizada por la API",
+                    publicacionActualizada
+                );
                 mostrarMensaje(
-                    `Publicación con ID ${id} actualizada correctamente.`,
+                    `El título de la publicación ${id} fue actualizado correctamente.`,
                     "exito"
                 );
-
                 document.getElementById("formActualizar").reset();
             } catch (error) {
                 manejarError(error);
+            } finally {
+                configurarBoton(boton, false, "Actualizar título", "Actualizando...");
             }
         }
 
         async function eliminarPublicacion(id) {
+            const boton = document.getElementById("btnEliminar");
             limpiarMensaje();
 
             const confirmado = window.confirm(
-                `¿Está seguro de eliminar la publicación con ID ${id}?`
+                `¿Está seguro de simular la eliminación de la publicación ${id}?`
             );
 
             if (!confirmado) {
@@ -754,109 +816,120 @@
                 return;
             }
 
+            configurarBoton(boton, true, "Eliminar publicación", "Eliminando...");
+
             try {
-                const respuesta = await fetch(`${API_URL}/${id}`, {
-                    method: "DELETE"
-                });
-
-                if (respuesta.status === 404) {
-                    throw new Error(`No existe una publicación con el ID ${id}.`);
-                }
-
-                await procesarRespuesta(
-                    respuesta,
-                    "No se pudo eliminar la publicación."
+                await solicitar(
+                    `${API_URL}/${id}`,
+                    { method: "DELETE" },
+                    `No se pudo eliminar la publicación ${id}.`
                 );
 
                 mostrarMensaje(
-                    `Publicación con ID ${id} eliminada correctamente.`,
+                    `La eliminación de la publicación ${id} fue simulada correctamente.`,
                     "exito"
                 );
-
                 document.getElementById("formEliminar").reset();
             } catch (error) {
                 manejarError(error);
+            } finally {
+                configurarBoton(boton, false, "Eliminar publicación", "Eliminando...");
             }
         }
 
-        btnListar.addEventListener("click", listarPublicaciones);
+        document.getElementById("btnListar").addEventListener("click", listarPublicaciones);
 
-        document
-            .getElementById("formBuscar")
-            .addEventListener("submit", async (evento) => {
-                evento.preventDefault();
+        document.getElementById("btnQuitarFiltro").addEventListener("click", () => {
+            document.getElementById("formFiltrar").reset();
+            listarPublicaciones();
+        });
 
-                try {
-                    const id = validarId(
-                        document.getElementById("buscarId").value,
-                        "ID de la publicación"
-                    );
+        document.getElementById("formFiltrar").addEventListener("submit", async (evento) => {
+            evento.preventDefault();
 
-                    await buscarPublicacionPorId(id);
-                } catch (error) {
-                    manejarError(error);
-                }
-            });
+            try {
+                const userId = validarEnteroPositivo(
+                    document.getElementById("filtrarUserId").value,
+                    "El ID del usuario"
+                );
+                await filtrarPublicacionesPorUsuario(userId);
+            } catch (error) {
+                manejarError(error);
+            }
+        });
 
-        document
-            .getElementById("formCrear")
-            .addEventListener("submit", async (evento) => {
-                evento.preventDefault();
+        document.getElementById("formBuscar").addEventListener("submit", async (evento) => {
+            evento.preventDefault();
 
-                try {
-                    const publicacion = validarPublicacion(
+            try {
+                const id = validarEnteroPositivo(
+                    document.getElementById("buscarId").value,
+                    "El ID de la publicación"
+                );
+                await buscarPublicacionPorId(id);
+            } catch (error) {
+                manejarError(error);
+            }
+        });
+
+        document.getElementById("formCrear").addEventListener("submit", async (evento) => {
+            evento.preventDefault();
+
+            try {
+                const publicacion = {
+                    userId: validarEnteroPositivo(
                         document.getElementById("crearUserId").value,
+                        "El ID del usuario"
+                    ),
+                    title: validarTexto(
                         document.getElementById("crearTitle").value,
-                        document.getElementById("crearBody").value
-                    );
+                        "El título"
+                    ),
+                    body: validarTexto(
+                        document.getElementById("crearBody").value,
+                        "El contenido"
+                    )
+                };
 
-                    await crearPublicacion(publicacion);
-                } catch (error) {
-                    manejarError(error);
-                }
-            });
+                await crearPublicacion(publicacion);
+            } catch (error) {
+                manejarError(error);
+            }
+        });
 
-        document
-            .getElementById("formActualizar")
-            .addEventListener("submit", async (evento) => {
-                evento.preventDefault();
+        document.getElementById("formActualizar").addEventListener("submit", async (evento) => {
+            evento.preventDefault();
 
-                try {
-                    const id = validarId(
-                        document.getElementById("actualizarId").value,
-                        "ID de la publicación"
-                    );
+            try {
+                const id = validarEnteroPositivo(
+                    document.getElementById("actualizarId").value,
+                    "El ID de la publicación"
+                );
+                const nuevoTitulo = validarTexto(
+                    document.getElementById("actualizarTitle").value,
+                    "El nuevo título"
+                );
 
-                    const publicacion = validarPublicacion(
-                        document.getElementById("actualizarUserId").value,
-                        document.getElementById("actualizarTitle").value,
-                        document.getElementById("actualizarBody").value
-                    );
+                await actualizarTitulo(id, nuevoTitulo);
+            } catch (error) {
+                manejarError(error);
+            }
+        });
 
-                    await actualizarPublicacion(id, publicacion);
-                } catch (error) {
-                    manejarError(error);
-                }
-            });
+        document.getElementById("formEliminar").addEventListener("submit", async (evento) => {
+            evento.preventDefault();
 
-        document
-            .getElementById("formEliminar")
-            .addEventListener("submit", async (evento) => {
-                evento.preventDefault();
+            try {
+                const id = validarEnteroPositivo(
+                    document.getElementById("eliminarId").value,
+                    "El ID de la publicación"
+                );
+                await eliminarPublicacion(id);
+            } catch (error) {
+                manejarError(error);
+            }
+        });
 
-                try {
-                    const id = validarId(
-                        document.getElementById("eliminarId").value,
-                        "ID de la publicación"
-                    );
-
-                    await eliminarPublicacion(id);
-                } catch (error) {
-                    manejarError(error);
-                }
-            });
-
-        // Consulta las publicaciones automáticamente al abrir la página.
         window.addEventListener("DOMContentLoaded", listarPublicaciones);
     </script>
 </body>
