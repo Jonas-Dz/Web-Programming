@@ -1,0 +1,904 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Productos</title>
+
+    <style>
+        :root {
+            --azul: #38393b;
+            --azul-oscuro: #1b1f2a;
+            --verde: #16a34a;
+            --rojo: #dc2626;
+            --amarillo: #d97706;
+            --gris-claro: #f3f4f6;
+            --gris-borde: #d1d5db;
+            --gris-texto: #4b5563;
+            --blanco: #ffffff;
+            --negro: #111827;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            background: var(--gris-claro);
+            color: var(--negro);
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--azul-oscuro), var(--azul));
+            color: var(--blanco);
+            padding: 28px 20px;
+            text-align: center;
+        }
+
+        header h1 {
+            margin: 0 0 8px;
+            font-size: clamp(1.8rem, 4vw, 2.8rem);
+        }
+
+        header p {
+            margin: 0;
+            opacity: 0.9;
+        }
+
+        main {
+            width: min(1200px, 94%);
+            margin: 24px auto 50px;
+        }
+
+        .panel {
+            background: var(--blanco);
+            border-radius: 14px;
+            padding: 22px;
+            margin-bottom: 22px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+        }
+
+        .panel h2 {
+            margin-top: 0;
+            color: var(--azul-oscuro);
+        }
+
+        .acciones {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        button {
+            border: none;
+            border-radius: 8px;
+            padding: 11px 17px;
+            font-size: 0.95rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.15s ease, opacity 0.15s ease;
+        }
+
+        button:hover {
+            transform: translateY(-1px);
+            opacity: 0.92;
+        }
+
+        button:disabled {
+            cursor: not-allowed;
+            opacity: 0.55;
+            transform: none;
+        }
+
+        .btn-azul {
+            background: var(--azul);
+            color: var(--blanco);
+        }
+
+        .btn-verde {
+            background: var(--verde);
+            color: var(--blanco);
+        }
+
+        .btn-amarillo {
+            background: var(--amarillo);
+            color: var(--blanco);
+        }
+
+        .btn-rojo {
+            background: var(--rojo);
+            color: var(--blanco);
+        }
+
+        .formulario {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 16px;
+        }
+
+        .campo {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .campo-completo {
+            grid-column: 1 / -1;
+        }
+
+        label {
+            font-weight: bold;
+            color: var(--gris-texto);
+        }
+
+        input,
+        textarea {
+            width: 100%;
+            border: 1px solid var(--gris-borde);
+            border-radius: 8px;
+            padding: 11px 12px;
+            font-size: 1rem;
+            outline: none;
+        }
+
+        textarea {
+            min-height: 90px;
+            resize: vertical;
+        }
+
+        input:focus,
+        textarea:focus {
+            border-color: var(--azul);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+        }
+
+        .tabla-contenedor {
+            overflow-x: auto;
+            margin-top: 18px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 760px;
+        }
+
+        th,
+        td {
+            border-bottom: 1px solid var(--gris-borde);
+            padding: 12px;
+            text-align: left;
+        }
+
+        th {
+            background: #eff6ff;
+            color: var(--azul-oscuro);
+        }
+
+        tr:hover td {
+            background: #f9fafb;
+        }
+
+        .mensaje {
+            display: none;
+            margin-bottom: 20px;
+            border-radius: 9px;
+            padding: 13px 15px;
+            font-weight: bold;
+        }
+
+        .mensaje.visible {
+            display: block;
+        }
+
+        .mensaje.exito {
+            background: #dcfce7;
+            color: #166534;
+            border: 1px solid #86efac;
+        }
+
+        .mensaje.error {
+            background: #fee2e2;
+            color: #991b1b;
+            border: 1px solid #fca5a5;
+        }
+
+        .mensaje.info {
+            background: #dbeafe;
+            color: #1e3a8a;
+            border: 1px solid #93c5fd;
+        }
+
+        .producto-encontrado {
+            display: none;
+            margin-top: 16px;
+            padding: 16px;
+            border-left: 5px solid var(--azul);
+            border-radius: 8px;
+            background: #eff6ff;
+        }
+
+        .producto-encontrado.visible {
+            display: block;
+        }
+
+        .producto-encontrado p {
+            margin: 7px 0;
+        }
+
+        .contador {
+            margin-top: 12px;
+            color: var(--gris-texto);
+            font-weight: bold;
+        }
+
+        .nota {
+            margin-top: 12px;
+            color: var(--gris-texto);
+            font-size: 0.92rem;
+        }
+
+        @media (max-width: 700px) {
+            .formulario {
+                grid-template-columns: 1fr;
+            }
+
+            .campo-completo {
+                grid-column: auto;
+            }
+
+            .panel {
+                padding: 17px;
+            }
+
+            button {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Sistema de Productos</h1>
+        <p>Gestión de productos mediante una API REST</p>
+    </header>
+
+    <main>
+        <div id="mensaje" class="mensaje"></div>
+
+        <section class="panel">
+            <h2>1. Listar productos</h2>
+
+            <div class="acciones">
+                <button id="btnListar" class="btn-azul" type="button">
+                    Consultar productos
+                </button>
+            </div>
+
+            <div class="tabla-contenedor">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nombre</th>
+                            <th>Descripción</th>
+                            <th>Precio</th>
+                            <th>Stock</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="tablaProductos">
+                        <tr>
+                            <td colspan="5">Presione “Consultar productos”.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div id="contadorProductos" class="contador"></div>
+        </section>
+
+        <section class="panel">
+            <h2>2. Buscar producto por ID</h2>
+
+            <form id="formBuscar" class="formulario">
+                <div class="campo">
+                    <label for="buscarId">ID del producto</label>
+                    <input
+                        id="buscarId"
+                        type="number"
+                        min="1"
+                        step="1"
+                        placeholder="Ejemplo: 1"
+                        required
+                    >
+                </div>
+
+                <div class="campo" style="justify-content: end;">
+                    <button class="btn-azul" type="submit">
+                        Buscar producto
+                    </button>
+                </div>
+            </form>
+
+            <div id="productoEncontrado" class="producto-encontrado"></div>
+        </section>
+
+        <section class="panel">
+            <h2>3. Crear producto</h2>
+
+            <form id="formCrear" class="formulario">
+                <div class="campo">
+                    <label for="crearNombre">Nombre</label>
+                    <input
+                        id="crearNombre"
+                        type="text"
+                        placeholder="Nombre del producto"
+                        required
+                    >
+                </div>
+
+                <div class="campo">
+                    <label for="crearPrecio">Precio</label>
+                    <input
+                        id="crearPrecio"
+                        type="number"
+                        min="0"
+                        step="0.01"
+                        placeholder="0.00"
+                        required
+                    >
+                </div>
+
+                <div class="campo">
+                    <label for="crearStock">Stock</label>
+                    <input
+                        id="crearStock"
+                        type="number"
+                        min="0"
+                        step="1"
+                        placeholder="0"
+                        required
+                    >
+                </div>
+
+                <div class="campo campo-completo">
+                    <label for="crearDescripcion">Descripción</label>
+                    <textarea
+                        id="crearDescripcion"
+                        placeholder="Descripción del producto"
+                        required
+                    ></textarea>
+                </div>
+
+                <div class="campo campo-completo">
+                    <button class="btn-verde" type="submit">
+                        Crear producto
+                    </button>
+                </div>
+            </form>
+        </section>
+
+        <section class="panel">
+            <h2>4. Actualizar producto</h2>
+
+            <form id="formActualizar" class="formulario">
+                <div class="campo">
+                    <label for="actualizarId">ID del producto</label>
+                    <input
+                        id="actualizarId"
+                        type="number"
+                        min="1"
+                        step="1"
+                        placeholder="ID a actualizar"
+                        required
+                    >
+                </div>
+
+                <div class="campo">
+                    <label for="actualizarNombre">Nuevo nombre</label>
+                    <input
+                        id="actualizarNombre"
+                        type="text"
+                        placeholder="Nuevo nombre"
+                        required
+                    >
+                </div>
+
+                <div class="campo">
+                    <label for="actualizarPrecio">Nuevo precio</label>
+                    <input
+                        id="actualizarPrecio"
+                        type="number"
+                        min="0"
+                        step="0.01"
+                        placeholder="0.00"
+                        required
+                    >
+                </div>
+
+                <div class="campo">
+                    <label for="actualizarStock">Nuevo stock</label>
+                    <input
+                        id="actualizarStock"
+                        type="number"
+                        min="0"
+                        step="1"
+                        placeholder="0"
+                        required
+                    >
+                </div>
+
+                <div class="campo campo-completo">
+                    <label for="actualizarDescripcion">Nueva descripción</label>
+                    <textarea
+                        id="actualizarDescripcion"
+                        placeholder="Nueva descripción"
+                        required
+                    ></textarea>
+                </div>
+
+                <div class="campo campo-completo">
+                    <button class="btn-amarillo" type="submit">
+                        Actualizar producto
+                    </button>
+                </div>
+            </form>
+        </section>
+
+        <section class="panel">
+            <h2>5. Eliminar producto</h2>
+
+            <form id="formEliminar" class="formulario">
+                <div class="campo">
+                    <label for="eliminarId">ID del producto</label>
+                    <input
+                        id="eliminarId"
+                        type="number"
+                        min="1"
+                        step="1"
+                        placeholder="ID a eliminar"
+                        required
+                    >
+                </div>
+
+                <div class="campo" style="justify-content: end;">
+                    <button class="btn-rojo" type="submit">
+                        Eliminar producto
+                    </button>
+                </div>
+            </form>
+
+            <p class="nota">
+                Antes de eliminar, el sistema solicitará confirmación.
+            </p>
+        </section>
+    </main>
+
+    <script>
+        "use strict";
+
+        // Dirección base de la API.
+        const API_URL = "http://10.40.34.138:3001/api/products";
+
+        const mensaje = document.getElementById("mensaje");
+        const tablaProductos = document.getElementById("tablaProductos");
+        const contadorProductos = document.getElementById("contadorProductos");
+        const productoEncontrado = document.getElementById("productoEncontrado");
+        const btnListar = document.getElementById("btnListar");
+
+        function escaparHTML(valor) {
+            return String(valor)
+                .replaceAll("&", "&amp;")
+                .replaceAll("<", "&lt;")
+                .replaceAll(">", "&gt;")
+                .replaceAll('"', "&quot;")
+                .replaceAll("'", "&#039;");
+        }
+
+        function mostrarMensaje(texto, tipo = "info") {
+            mensaje.textContent = texto;
+            mensaje.className = `mensaje visible ${tipo}`;
+
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            });
+        }
+
+        function limpiarMensaje() {
+            mensaje.textContent = "";
+            mensaje.className = "mensaje";
+        }
+
+        function validarId(valor) {
+            const id = Number(valor);
+
+            if (
+                valor === "" ||
+                Number.isNaN(id) ||
+                id <= 0 ||
+                !Number.isInteger(id)
+            ) {
+                throw new Error("Debe ingresar un ID entero mayor que cero.");
+            }
+
+            return id;
+        }
+
+        function validarProducto(nombre, descripcion, precioTexto, stockTexto) {
+            const name = nombre.trim();
+            const description = descripcion.trim();
+            const price = Number(precioTexto);
+            const stock = Number(stockTexto);
+
+            if (name === "") {
+                throw new Error("El nombre es obligatorio.");
+            }
+
+            if (description === "") {
+                throw new Error("La descripción es obligatoria.");
+            }
+
+            if (
+                precioTexto === "" ||
+                Number.isNaN(price) ||
+                price < 0
+            ) {
+                throw new Error("El precio debe ser un número válido.");
+            }
+
+            if (
+                stockTexto === "" ||
+                Number.isNaN(stock) ||
+                stock < 0 ||
+                !Number.isInteger(stock)
+            ) {
+                throw new Error(
+                    "El stock debe ser un número entero válido."
+                );
+            }
+
+            return {
+                name,
+                description,
+                price,
+                stock
+            };
+        }
+
+        async function procesarRespuesta(respuesta, mensajeGeneral) {
+            let datos = null;
+
+            const tipoContenido = respuesta.headers.get("content-type");
+
+            if (tipoContenido && tipoContenido.includes("application/json")) {
+                datos = await respuesta.json();
+            }
+
+            if (!respuesta.ok) {
+                const mensajeApi =
+                    datos?.message ||
+                    datos?.error ||
+                    `${mensajeGeneral} Código: ${respuesta.status}`;
+
+                throw new Error(mensajeApi);
+            }
+
+            return datos;
+        }
+
+        function manejarError(error) {
+            console.error(error);
+
+            if (error instanceof TypeError) {
+                mostrarMensaje(
+                    "Error de conexión. Verifique que la API esté encendida y permita solicitudes desde el navegador.",
+                    "error"
+                );
+                return;
+            }
+
+            if (error instanceof Error) {
+                mostrarMensaje(error.message, "error");
+                return;
+            }
+
+            mostrarMensaje("Ocurrió un error desconocido.", "error");
+        }
+
+        function dibujarTabla(productos) {
+            tablaProductos.innerHTML = "";
+            contadorProductos.textContent = "";
+
+            if (!Array.isArray(productos) || productos.length === 0) {
+                tablaProductos.innerHTML = `
+                    <tr>
+                        <td colspan="5">
+                            No existen productos registrados.
+                        </td>
+                    </tr>
+                `;
+                return;
+            }
+
+            for (const producto of productos) {
+                const fila = document.createElement("tr");
+
+                fila.innerHTML = `
+                    <td>${escaparHTML(producto.id)}</td>
+                    <td>${escaparHTML(producto.name)}</td>
+                    <td>${escaparHTML(producto.description)}</td>
+                    <td>$${Number(producto.price).toFixed(2)}</td>
+                    <td>${escaparHTML(producto.stock)}</td>
+                `;
+
+                tablaProductos.appendChild(fila);
+            }
+
+            contadorProductos.textContent =
+                `Total de productos: ${productos.length}`;
+        }
+
+        function dibujarProductoEncontrado(producto) {
+            productoEncontrado.innerHTML = `
+                <h3>Producto encontrado</h3>
+                <p><strong>ID:</strong> ${escaparHTML(producto.id)}</p>
+                <p><strong>Nombre:</strong> ${escaparHTML(producto.name)}</p>
+                <p>
+                    <strong>Descripción:</strong>
+                    ${escaparHTML(producto.description)}
+                </p>
+                <p>
+                    <strong>Precio:</strong>
+                    $${Number(producto.price).toFixed(2)}
+                </p>
+                <p><strong>Stock:</strong> ${escaparHTML(producto.stock)}</p>
+            `;
+
+            productoEncontrado.classList.add("visible");
+        }
+
+        async function listarProductos() {
+            limpiarMensaje();
+            btnListar.disabled = true;
+            btnListar.textContent = "Consultando...";
+
+            try {
+                const respuesta = await fetch(API_URL);
+                const productos = await procesarRespuesta(
+                    respuesta,
+                    "No se pudieron consultar los productos."
+                );
+
+                dibujarTabla(productos);
+                mostrarMensaje(
+                    "Productos consultados correctamente.",
+                    "exito"
+                );
+            } catch (error) {
+                dibujarTabla([]);
+                manejarError(error);
+            } finally {
+                btnListar.disabled = false;
+                btnListar.textContent = "Consultar productos";
+            }
+        }
+
+        async function buscarProductoPorId(id) {
+            limpiarMensaje();
+            productoEncontrado.classList.remove("visible");
+            productoEncontrado.innerHTML = "";
+
+            try {
+                const respuesta = await fetch(`${API_URL}/${id}`);
+
+                if (respuesta.status === 404) {
+                    throw new Error(
+                        `No existe un producto con el ID ${id}.`
+                    );
+                }
+
+                const producto = await procesarRespuesta(
+                    respuesta,
+                    "No se pudo consultar el producto."
+                );
+
+                dibujarProductoEncontrado(producto);
+                mostrarMensaje(
+                    `Producto con ID ${id} encontrado correctamente.`,
+                    "exito"
+                );
+            } catch (error) {
+                manejarError(error);
+            }
+        }
+
+        async function crearProducto(producto) {
+            limpiarMensaje();
+
+            try {
+                const respuesta = await fetch(API_URL, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(producto)
+                });
+
+                const productoCreado = await procesarRespuesta(
+                    respuesta,
+                    "No se pudo crear el producto."
+                );
+
+                mostrarMensaje(
+                    `Producto "${productoCreado?.name ?? producto.name}" creado correctamente.`,
+                    "exito"
+                );
+
+                document.getElementById("formCrear").reset();
+                await listarProductos();
+            } catch (error) {
+                manejarError(error);
+            }
+        }
+
+        async function actualizarProducto(id, producto) {
+            limpiarMensaje();
+
+            try {
+                const respuesta = await fetch(`${API_URL}/${id}`, {
+                    method: "PUT",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(producto)
+                });
+
+                if (respuesta.status === 404) {
+                    throw new Error(
+                        `No existe un producto con el ID ${id}.`
+                    );
+                }
+
+                await procesarRespuesta(
+                    respuesta,
+                    "No se pudo actualizar el producto."
+                );
+
+                mostrarMensaje(
+                    `Producto con ID ${id} actualizado correctamente.`,
+                    "exito"
+                );
+
+                document.getElementById("formActualizar").reset();
+                await listarProductos();
+            } catch (error) {
+                manejarError(error);
+            }
+        }
+
+        async function eliminarProducto(id) {
+            limpiarMensaje();
+
+            const confirmado = window.confirm(
+                `¿Está seguro de eliminar el producto con ID ${id}?`
+            );
+
+            if (!confirmado) {
+                mostrarMensaje("Eliminación cancelada.", "info");
+                return;
+            }
+
+            try {
+                const respuesta = await fetch(`${API_URL}/${id}`, {
+                    method: "DELETE"
+                });
+
+                if (respuesta.status === 404) {
+                    throw new Error(
+                        `No existe un producto con el ID ${id}.`
+                    );
+                }
+
+                await procesarRespuesta(
+                    respuesta,
+                    "No se pudo eliminar el producto."
+                );
+
+                mostrarMensaje(
+                    `Producto con ID ${id} eliminado correctamente.`,
+                    "exito"
+                );
+
+                document.getElementById("formEliminar").reset();
+                await listarProductos();
+            } catch (error) {
+                manejarError(error);
+            }
+        }
+
+        btnListar.addEventListener("click", listarProductos);
+
+        document
+            .getElementById("formBuscar")
+            .addEventListener("submit", async (evento) => {
+                evento.preventDefault();
+
+                try {
+                    const id = validarId(
+                        document.getElementById("buscarId").value
+                    );
+
+                    await buscarProductoPorId(id);
+                } catch (error) {
+                    manejarError(error);
+                }
+            });
+
+        document
+            .getElementById("formCrear")
+            .addEventListener("submit", async (evento) => {
+                evento.preventDefault();
+
+                try {
+                    const producto = validarProducto(
+                        document.getElementById("crearNombre").value,
+                        document.getElementById("crearDescripcion").value,
+                        document.getElementById("crearPrecio").value,
+                        document.getElementById("crearStock").value
+                    );
+
+                    await crearProducto(producto);
+                } catch (error) {
+                    manejarError(error);
+                }
+            });
+
+        document
+            .getElementById("formActualizar")
+            .addEventListener("submit", async (evento) => {
+                evento.preventDefault();
+
+                try {
+                    const id = validarId(
+                        document.getElementById("actualizarId").value
+                    );
+
+                    const producto = validarProducto(
+                        document.getElementById("actualizarNombre").value,
+                        document.getElementById("actualizarDescripcion").value,
+                        document.getElementById("actualizarPrecio").value,
+                        document.getElementById("actualizarStock").value
+                    );
+
+                    await actualizarProducto(id, producto);
+                } catch (error) {
+                    manejarError(error);
+                }
+            });
+
+        document
+            .getElementById("formEliminar")
+            .addEventListener("submit", async (evento) => {
+                evento.preventDefault();
+
+                try {
+                    const id = validarId(
+                        document.getElementById("eliminarId").value
+                    );
+
+                    await eliminarProducto(id);
+                } catch (error) {
+                    manejarError(error);
+                }
+            });
+
+        // Consulta automáticamente los productos al abrir la página.
+        window.addEventListener("DOMContentLoaded", listarProductos);
+    </script>
+</body>
+</html>
