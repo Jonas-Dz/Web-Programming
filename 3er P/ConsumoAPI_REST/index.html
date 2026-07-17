@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sistema de Productos</title>
+    <title>Sistema de Tareas</title>
 
     <style>
         :root {
@@ -134,13 +134,15 @@
         }
 
         input,
-        textarea {
+        textarea,
+        select {
             width: 100%;
             border: 1px solid var(--gris-borde);
             border-radius: 8px;
             padding: 11px 12px;
             font-size: 1rem;
             outline: none;
+            background: var(--blanco);
         }
 
         textarea {
@@ -149,7 +151,8 @@
         }
 
         input:focus,
-        textarea:focus {
+        textarea:focus,
+        select:focus {
             border-color: var(--azul);
             box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
         }
@@ -162,7 +165,7 @@
         table {
             width: 100%;
             border-collapse: collapse;
-            min-width: 760px;
+            min-width: 700px;
         }
 
         th,
@@ -179,6 +182,24 @@
 
         tr:hover td {
             background: #f9fafb;
+        }
+
+        .estado {
+            display: inline-block;
+            padding: 5px 9px;
+            border-radius: 999px;
+            font-size: 0.85rem;
+            font-weight: bold;
+        }
+
+        .estado-completada {
+            background: #dcfce7;
+            color: #166534;
+        }
+
+        .estado-pendiente {
+            background: #fef3c7;
+            color: #92400e;
         }
 
         .mensaje {
@@ -211,7 +232,7 @@
             border: 1px solid #93c5fd;
         }
 
-        .producto-encontrado {
+        .tarea-encontrada {
             display: none;
             margin-top: 16px;
             padding: 16px;
@@ -220,11 +241,11 @@
             background: #eff6ff;
         }
 
-        .producto-encontrado.visible {
+        .tarea-encontrada.visible {
             display: block;
         }
 
-        .producto-encontrado p {
+        .tarea-encontrada p {
             margin: 7px 0;
         }
 
@@ -262,19 +283,19 @@
 
 <body>
     <header>
-        <h1>Sistema de Productos</h1>
-        <p>Gestión de productos mediante una API REST</p>
+        <h1>Sistema de Tareas</h1>
+        <p>Gestión de tareas mediante la API JSONPlaceholder</p>
     </header>
 
     <main>
         <div id="mensaje" class="mensaje"></div>
 
         <section class="panel">
-            <h2>1. Listar productos</h2>
+            <h2>1. Listar tareas</h2>
 
             <div class="acciones">
                 <button id="btnListar" class="btn-azul" type="button">
-                    Consultar productos
+                    Consultar tareas
                 </button>
             </div>
 
@@ -283,30 +304,29 @@
                     <thead>
                         <tr>
                             <th>ID</th>
-                            <th>Nombre</th>
-                            <th>Descripción</th>
-                            <th>Precio</th>
-                            <th>Stock</th>
+                            <th>ID del usuario</th>
+                            <th>Título</th>
+                            <th>Completada</th>
                         </tr>
                     </thead>
 
-                    <tbody id="tablaProductos">
+                    <tbody id="tablaTareas">
                         <tr>
-                            <td colspan="5">Presione “Consultar productos”.</td>
+                            <td colspan="4">Presione “Consultar tareas”.</td>
                         </tr>
                     </tbody>
                 </table>
             </div>
 
-            <div id="contadorProductos" class="contador"></div>
+            <div id="contadorTareas" class="contador"></div>
         </section>
 
         <section class="panel">
-            <h2>2. Buscar producto por ID</h2>
+            <h2>2. Buscar tarea por ID</h2>
 
             <form id="formBuscar" class="formulario">
                 <div class="campo">
-                    <label for="buscarId">ID del producto</label>
+                    <label for="buscarId">ID de la tarea</label>
                     <input
                         id="buscarId"
                         type="number"
@@ -319,75 +339,61 @@
 
                 <div class="campo" style="justify-content: end;">
                     <button class="btn-azul" type="submit">
-                        Buscar producto
+                        Buscar tarea
                     </button>
                 </div>
             </form>
 
-            <div id="productoEncontrado" class="producto-encontrado"></div>
+            <div id="tareaEncontrada" class="tarea-encontrada"></div>
         </section>
 
         <section class="panel">
-            <h2>3. Crear producto</h2>
+            <h2>3. Crear tarea</h2>
 
             <form id="formCrear" class="formulario">
                 <div class="campo">
-                    <label for="crearNombre">Nombre</label>
+                    <label for="crearUserId">ID del usuario</label>
                     <input
-                        id="crearNombre"
-                        type="text"
-                        placeholder="Nombre del producto"
-                        required
-                    >
-                </div>
-
-                <div class="campo">
-                    <label for="crearPrecio">Precio</label>
-                    <input
-                        id="crearPrecio"
+                        id="crearUserId"
                         type="number"
-                        min="0"
-                        step="0.01"
-                        placeholder="0.00"
-                        required
-                    >
-                </div>
-
-                <div class="campo">
-                    <label for="crearStock">Stock</label>
-                    <input
-                        id="crearStock"
-                        type="number"
-                        min="0"
+                        min="1"
                         step="1"
-                        placeholder="0"
+                        placeholder="Ejemplo: 1"
                         required
                     >
+                </div>
+
+                <div class="campo">
+                    <label for="crearCompleted">Estado</label>
+                    <select id="crearCompleted" required>
+                        <option value="false">Pendiente</option>
+                        <option value="true">Completada</option>
+                    </select>
                 </div>
 
                 <div class="campo campo-completo">
-                    <label for="crearDescripcion">Descripción</label>
+                    <label for="crearTitle">Título</label>
                     <textarea
-                        id="crearDescripcion"
-                        placeholder="Descripción del producto"
+                        id="crearTitle"
+                        placeholder="Escriba el título de la tarea"
                         required
                     ></textarea>
                 </div>
 
                 <div class="campo campo-completo">
                     <button class="btn-verde" type="submit">
-                        Crear producto
+                        Crear tarea
                     </button>
                 </div>
             </form>
         </section>
 
         <section class="panel">
-            <h2>4. Actualizar producto</h2>
+            <h2>4. Actualizar tarea</h2>
 
             <form id="formActualizar" class="formulario">
                 <div class="campo">
-                    <label for="actualizarId">ID del producto</label>
+                    <label for="actualizarId">ID de la tarea</label>
                     <input
                         id="actualizarId"
                         type="number"
@@ -399,62 +405,48 @@
                 </div>
 
                 <div class="campo">
-                    <label for="actualizarNombre">Nuevo nombre</label>
+                    <label for="actualizarUserId">Nuevo ID del usuario</label>
                     <input
-                        id="actualizarNombre"
-                        type="text"
-                        placeholder="Nuevo nombre"
-                        required
-                    >
-                </div>
-
-                <div class="campo">
-                    <label for="actualizarPrecio">Nuevo precio</label>
-                    <input
-                        id="actualizarPrecio"
+                        id="actualizarUserId"
                         type="number"
-                        min="0"
-                        step="0.01"
-                        placeholder="0.00"
-                        required
-                    >
-                </div>
-
-                <div class="campo">
-                    <label for="actualizarStock">Nuevo stock</label>
-                    <input
-                        id="actualizarStock"
-                        type="number"
-                        min="0"
+                        min="1"
                         step="1"
-                        placeholder="0"
+                        placeholder="Ejemplo: 1"
                         required
                     >
+                </div>
+
+                <div class="campo">
+                    <label for="actualizarCompleted">Nuevo estado</label>
+                    <select id="actualizarCompleted" required>
+                        <option value="false">Pendiente</option>
+                        <option value="true">Completada</option>
+                    </select>
                 </div>
 
                 <div class="campo campo-completo">
-                    <label for="actualizarDescripcion">Nueva descripción</label>
+                    <label for="actualizarTitle">Nuevo título</label>
                     <textarea
-                        id="actualizarDescripcion"
-                        placeholder="Nueva descripción"
+                        id="actualizarTitle"
+                        placeholder="Nuevo título de la tarea"
                         required
                     ></textarea>
                 </div>
 
                 <div class="campo campo-completo">
                     <button class="btn-amarillo" type="submit">
-                        Actualizar producto
+                        Actualizar tarea
                     </button>
                 </div>
             </form>
         </section>
 
         <section class="panel">
-            <h2>5. Eliminar producto</h2>
+            <h2>5. Eliminar tarea</h2>
 
             <form id="formEliminar" class="formulario">
                 <div class="campo">
-                    <label for="eliminarId">ID del producto</label>
+                    <label for="eliminarId">ID de la tarea</label>
                     <input
                         id="eliminarId"
                         type="number"
@@ -467,13 +459,13 @@
 
                 <div class="campo" style="justify-content: end;">
                     <button class="btn-rojo" type="submit">
-                        Eliminar producto
+                        Eliminar tarea
                     </button>
                 </div>
             </form>
 
             <p class="nota">
-                Antes de eliminar, el sistema solicitará confirmación.
+                JSONPlaceholder simula las operaciones POST, PUT y DELETE, pero no guarda los cambios permanentemente.
             </p>
         </section>
     </main>
@@ -481,13 +473,13 @@
     <script>
         "use strict";
 
-        // Dirección base de la API.
-        const API_URL = "https://jsonplaceholder.typicode.com";
+        // Endpoint de tareas de JSONPlaceholder.
+        const API_URL = "https://jsonplaceholder.typicode.com/todos";
 
         const mensaje = document.getElementById("mensaje");
-        const tablaProductos = document.getElementById("tablaProductos");
-        const contadorProductos = document.getElementById("contadorProductos");
-        const productoEncontrado = document.getElementById("productoEncontrado");
+        const tablaTareas = document.getElementById("tablaTareas");
+        const contadorTareas = document.getElementById("contadorTareas");
+        const tareaEncontrada = document.getElementById("tareaEncontrada");
         const btnListar = document.getElementById("btnListar");
 
         function escaparHTML(valor) {
@@ -514,7 +506,7 @@
             mensaje.className = "mensaje";
         }
 
-        function validarId(valor) {
+        function validarId(valor, nombreCampo = "ID") {
             const id = Number(valor);
 
             if (
@@ -523,56 +515,30 @@
                 id <= 0 ||
                 !Number.isInteger(id)
             ) {
-                throw new Error("Debe ingresar un ID entero mayor que cero.");
+                throw new Error(`${nombreCampo}: debe ingresar un número entero mayor que cero.`);
             }
 
             return id;
         }
 
-        function validarProducto(nombre, descripcion, precioTexto, stockTexto) {
-            const name = nombre.trim();
-            const description = descripcion.trim();
-            const price = Number(precioTexto);
-            const stock = Number(stockTexto);
+        function validarTarea(userIdTexto, titleTexto, completedTexto) {
+            const userId = validarId(userIdTexto, "ID del usuario");
+            const title = titleTexto.trim();
+            const completed = completedTexto === "true";
 
-            if (name === "") {
-                throw new Error("El nombre es obligatorio.");
-            }
-
-            if (description === "") {
-                throw new Error("La descripción es obligatoria.");
-            }
-
-            if (
-                precioTexto === "" ||
-                Number.isNaN(price) ||
-                price < 0
-            ) {
-                throw new Error("El precio debe ser un número válido.");
-            }
-
-            if (
-                stockTexto === "" ||
-                Number.isNaN(stock) ||
-                stock < 0 ||
-                !Number.isInteger(stock)
-            ) {
-                throw new Error(
-                    "El stock debe ser un número entero válido."
-                );
+            if (title === "") {
+                throw new Error("El título de la tarea es obligatorio.");
             }
 
             return {
-                name,
-                description,
-                price,
-                stock
+                userId,
+                title,
+                completed
             };
         }
 
         async function procesarRespuesta(respuesta, mensajeGeneral) {
             let datos = null;
-
             const tipoContenido = respuesta.headers.get("content-type");
 
             if (tipoContenido && tipoContenido.includes("application/json")) {
@@ -596,7 +562,7 @@
 
             if (error instanceof TypeError) {
                 mostrarMensaje(
-                    "Error de conexión. Verifique que la API esté encendida y permita solicitudes desde el navegador.",
+                    "Error de conexión. Verifique su conexión a Internet y el acceso a la API.",
                     "error"
                 );
                 return;
@@ -610,106 +576,98 @@
             mostrarMensaje("Ocurrió un error desconocido.", "error");
         }
 
-        function dibujarTabla(productos) {
-            tablaProductos.innerHTML = "";
-            contadorProductos.textContent = "";
+        function obtenerEstadoHTML(completed) {
+            if (completed) {
+                return '<span class="estado estado-completada">Sí</span>';
+            }
 
-            if (!Array.isArray(productos) || productos.length === 0) {
-                tablaProductos.innerHTML = `
+            return '<span class="estado estado-pendiente">No</span>';
+        }
+
+        function dibujarTabla(tareas) {
+            tablaTareas.innerHTML = "";
+            contadorTareas.textContent = "";
+
+            if (!Array.isArray(tareas) || tareas.length === 0) {
+                tablaTareas.innerHTML = `
                     <tr>
-                        <td colspan="5">
-                            No existen productos registrados.
-                        </td>
+                        <td colspan="4">No existen tareas registradas.</td>
                     </tr>
                 `;
                 return;
             }
 
-            for (const producto of productos) {
+            for (const tarea of tareas) {
                 const fila = document.createElement("tr");
 
                 fila.innerHTML = `
-                    <td>${escaparHTML(producto.id)}</td>
-                    <td>${escaparHTML(producto.name)}</td>
-                    <td>${escaparHTML(producto.description)}</td>
-                    <td>$${Number(producto.price).toFixed(2)}</td>
-                    <td>${escaparHTML(producto.stock)}</td>
+                    <td>${escaparHTML(tarea.id)}</td>
+                    <td>${escaparHTML(tarea.userId)}</td>
+                    <td>${escaparHTML(tarea.title)}</td>
+                    <td>${obtenerEstadoHTML(tarea.completed)}</td>
                 `;
 
-                tablaProductos.appendChild(fila);
+                tablaTareas.appendChild(fila);
             }
 
-            contadorProductos.textContent =
-                `Total de productos: ${productos.length}`;
+            contadorTareas.textContent = `Total de tareas: ${tareas.length}`;
         }
 
-        function dibujarProductoEncontrado(producto) {
-            productoEncontrado.innerHTML = `
-                <h3>Producto encontrado</h3>
-                <p><strong>ID:</strong> ${escaparHTML(producto.id)}</p>
-                <p><strong>Nombre:</strong> ${escaparHTML(producto.name)}</p>
-                <p>
-                    <strong>Descripción:</strong>
-                    ${escaparHTML(producto.description)}
-                </p>
-                <p>
-                    <strong>Precio:</strong>
-                    $${Number(producto.price).toFixed(2)}
-                </p>
-                <p><strong>Stock:</strong> ${escaparHTML(producto.stock)}</p>
+        function dibujarTareaEncontrada(tarea) {
+            tareaEncontrada.innerHTML = `
+                <h3>Tarea encontrada</h3>
+                <p><strong>ID:</strong> ${escaparHTML(tarea.id)}</p>
+                <p><strong>ID del usuario:</strong> ${escaparHTML(tarea.userId)}</p>
+                <p><strong>Título:</strong> ${escaparHTML(tarea.title)}</p>
+                <p><strong>Completada:</strong> ${tarea.completed ? "Sí" : "No"}</p>
             `;
 
-            productoEncontrado.classList.add("visible");
+            tareaEncontrada.classList.add("visible");
         }
 
-        async function listarProductos() {
+        async function listarTareas() {
             limpiarMensaje();
             btnListar.disabled = true;
             btnListar.textContent = "Consultando...";
 
             try {
                 const respuesta = await fetch(API_URL);
-                const productos = await procesarRespuesta(
+                const tareas = await procesarRespuesta(
                     respuesta,
-                    "No se pudieron consultar los productos."
+                    "No se pudieron consultar las tareas."
                 );
 
-                dibujarTabla(productos);
-                mostrarMensaje(
-                    "Productos consultados correctamente.",
-                    "exito"
-                );
+                dibujarTabla(tareas);
+                mostrarMensaje("Tareas consultadas correctamente.", "exito");
             } catch (error) {
                 dibujarTabla([]);
                 manejarError(error);
             } finally {
                 btnListar.disabled = false;
-                btnListar.textContent = "Consultar productos";
+                btnListar.textContent = "Consultar tareas";
             }
         }
 
-        async function buscarProductoPorId(id) {
+        async function buscarTareaPorId(id) {
             limpiarMensaje();
-            productoEncontrado.classList.remove("visible");
-            productoEncontrado.innerHTML = "";
+            tareaEncontrada.classList.remove("visible");
+            tareaEncontrada.innerHTML = "";
 
             try {
                 const respuesta = await fetch(`${API_URL}/${id}`);
 
                 if (respuesta.status === 404) {
-                    throw new Error(
-                        `No existe un producto con el ID ${id}.`
-                    );
+                    throw new Error(`No existe una tarea con el ID ${id}.`);
                 }
 
-                const producto = await procesarRespuesta(
+                const tarea = await procesarRespuesta(
                     respuesta,
-                    "No se pudo consultar el producto."
+                    "No se pudo consultar la tarea."
                 );
 
-                dibujarProductoEncontrado(producto);
+                dibujarTareaEncontrada(tarea);
                 mostrarMensaje(
-                    `Producto con ID ${id} encontrado correctamente.`,
+                    `Tarea con ID ${id} encontrada correctamente.`,
                     "exito"
                 );
             } catch (error) {
@@ -717,7 +675,7 @@
             }
         }
 
-        async function crearProducto(producto) {
+        async function crearTarea(tarea) {
             limpiarMensaje();
 
             try {
@@ -726,27 +684,26 @@
                     headers: {
                         "Content-Type": "application/json"
                     },
-                    body: JSON.stringify(producto)
+                    body: JSON.stringify(tarea)
                 });
 
-                const productoCreado = await procesarRespuesta(
+                const tareaCreada = await procesarRespuesta(
                     respuesta,
-                    "No se pudo crear el producto."
+                    "No se pudo crear la tarea."
                 );
 
                 mostrarMensaje(
-                    `Producto "${productoCreado?.name ?? producto.name}" creado correctamente.`,
+                    `Tarea creada correctamente con ID ${tareaCreada.id}.`,
                     "exito"
                 );
 
                 document.getElementById("formCrear").reset();
-                await listarProductos();
             } catch (error) {
                 manejarError(error);
             }
         }
 
-        async function actualizarProducto(id, producto) {
+        async function actualizarTarea(id, tarea) {
             limpiarMensaje();
 
             try {
@@ -755,37 +712,37 @@
                     headers: {
                         "Content-Type": "application/json"
                     },
-                    body: JSON.stringify(producto)
+                    body: JSON.stringify({
+                        id,
+                        ...tarea
+                    })
                 });
 
                 if (respuesta.status === 404) {
-                    throw new Error(
-                        `No existe un producto con el ID ${id}.`
-                    );
+                    throw new Error(`No existe una tarea con el ID ${id}.`);
                 }
 
                 await procesarRespuesta(
                     respuesta,
-                    "No se pudo actualizar el producto."
+                    "No se pudo actualizar la tarea."
                 );
 
                 mostrarMensaje(
-                    `Producto con ID ${id} actualizado correctamente.`,
+                    `Tarea con ID ${id} actualizada correctamente.`,
                     "exito"
                 );
 
                 document.getElementById("formActualizar").reset();
-                await listarProductos();
             } catch (error) {
                 manejarError(error);
             }
         }
 
-        async function eliminarProducto(id) {
+        async function eliminarTarea(id) {
             limpiarMensaje();
 
             const confirmado = window.confirm(
-                `¿Está seguro de eliminar el producto con ID ${id}?`
+                `¿Está seguro de eliminar la tarea con ID ${id}?`
             );
 
             if (!confirmado) {
@@ -799,29 +756,26 @@
                 });
 
                 if (respuesta.status === 404) {
-                    throw new Error(
-                        `No existe un producto con el ID ${id}.`
-                    );
+                    throw new Error(`No existe una tarea con el ID ${id}.`);
                 }
 
                 await procesarRespuesta(
                     respuesta,
-                    "No se pudo eliminar el producto."
+                    "No se pudo eliminar la tarea."
                 );
 
                 mostrarMensaje(
-                    `Producto con ID ${id} eliminado correctamente.`,
+                    `Tarea con ID ${id} eliminada correctamente.`,
                     "exito"
                 );
 
                 document.getElementById("formEliminar").reset();
-                await listarProductos();
             } catch (error) {
                 manejarError(error);
             }
         }
 
-        btnListar.addEventListener("click", listarProductos);
+        btnListar.addEventListener("click", listarTareas);
 
         document
             .getElementById("formBuscar")
@@ -830,10 +784,11 @@
 
                 try {
                     const id = validarId(
-                        document.getElementById("buscarId").value
+                        document.getElementById("buscarId").value,
+                        "ID de la tarea"
                     );
 
-                    await buscarProductoPorId(id);
+                    await buscarTareaPorId(id);
                 } catch (error) {
                     manejarError(error);
                 }
@@ -845,14 +800,13 @@
                 evento.preventDefault();
 
                 try {
-                    const producto = validarProducto(
-                        document.getElementById("crearNombre").value,
-                        document.getElementById("crearDescripcion").value,
-                        document.getElementById("crearPrecio").value,
-                        document.getElementById("crearStock").value
+                    const tarea = validarTarea(
+                        document.getElementById("crearUserId").value,
+                        document.getElementById("crearTitle").value,
+                        document.getElementById("crearCompleted").value
                     );
 
-                    await crearProducto(producto);
+                    await crearTarea(tarea);
                 } catch (error) {
                     manejarError(error);
                 }
@@ -865,17 +819,17 @@
 
                 try {
                     const id = validarId(
-                        document.getElementById("actualizarId").value
+                        document.getElementById("actualizarId").value,
+                        "ID de la tarea"
                     );
 
-                    const producto = validarProducto(
-                        document.getElementById("actualizarNombre").value,
-                        document.getElementById("actualizarDescripcion").value,
-                        document.getElementById("actualizarPrecio").value,
-                        document.getElementById("actualizarStock").value
+                    const tarea = validarTarea(
+                        document.getElementById("actualizarUserId").value,
+                        document.getElementById("actualizarTitle").value,
+                        document.getElementById("actualizarCompleted").value
                     );
 
-                    await actualizarProducto(id, producto);
+                    await actualizarTarea(id, tarea);
                 } catch (error) {
                     manejarError(error);
                 }
@@ -888,17 +842,18 @@
 
                 try {
                     const id = validarId(
-                        document.getElementById("eliminarId").value
+                        document.getElementById("eliminarId").value,
+                        "ID de la tarea"
                     );
 
-                    await eliminarProducto(id);
+                    await eliminarTarea(id);
                 } catch (error) {
                     manejarError(error);
                 }
             });
 
-        // Consulta automáticamente los productos al abrir la página.
-        window.addEventListener("DOMContentLoaded", listarProductos);
+        // Consulta las tareas automáticamente al abrir la página.
+        window.addEventListener("DOMContentLoaded", listarTareas);
     </script>
 </body>
 </html>
