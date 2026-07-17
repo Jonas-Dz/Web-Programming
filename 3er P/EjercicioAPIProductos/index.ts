@@ -19,7 +19,7 @@ interface NuevoProducto {
 }
 
 // Dirección base de la API
-const API_URL: string = "http://10.40.26.191:3001/api/products";
+const API_URL: string = "http://10.40.34.138:3001/api/products";
 
 // Configuración para ingresar datos por consola
 const consola = readline.createInterface({
