@@ -25,12 +25,7 @@ Donde:
 
 ***2. Ejecución del contenedor***  
 Para ejecutar el contenedor debemos ejecutar el siguiente comando  
-`docker run -d -p 8080:80 jonas-nginx`  
-
-Donde: 
--  `-d` ejecuta el contenedor en segundo plano
-- `-p 8080:80` asigna el puerto 80 del contenedor al puerto 8080 del equipo local (local host)
-- `jonas-nginx` indica el nombre de la imagen creada  
+`docker build -t jonas-consumo_api_rest `  
 
 ***3. Acceso al sitio web:***  
 Con el contenedor ejecutándose en segundo plano, podemos acceder al sitio web desde el navegador mediante la siguiente dirección:  
@@ -38,19 +33,19 @@ Con el contenedor ejecutándose en segundo plano, podemos acceder al sitio web d
 
 ***4. Descargar la imagen desde Docker Hub:***  
 Primer para descargar la imagen debemos publicarla en Docker Hub, esto lo hacemos con el comando:   
-`docker tag jonas-nginx jonasdz2002/jonas-nginx`  
+`docker tag jonas-consumo_api_rest jonasdz2002/consumo_api_rest`  
 El cual nos ayuda a darle un nombre en nuestro repositorio.  
 
 Posterior a eso la publicamos con:  
-`docker push jonasdz2002/jonas-nginx`  
+`docker push jonasdz2002/consumo_api_rest`  
 
 Para descargar la imagen desde Docker Hub utilizamos  
-`docker pull jonasdz2002/jonas-nginx`  
+`docker pull jonasdz2002/consumo_api_rest`  
 
 ***5. Ejecutar la imagen descargada:***  
 Una vez descargada la imagen, la ejecutaremos como si nosotros la hubiesemos creado, pero ahora nombrando el usuario y el nombre de la imagen  
-`docker run -d -p 8080:80 jonasdz2002/jonas-nginx`  
+`docker run -d -p 8080:80 jonasdz2002/consumo_api_rest`  
 
 ***
-[Link a la imagen en Docker](https://hub.docker.com/r/jonasdz2002/jonas-nginx)
+[Link a la imagen en Docker](https://hub.docker.com/r/jonasdz2002/consumo_api_rest)
 ***
